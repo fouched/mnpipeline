@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'gradle --version'
+                sh 'gradle clean test'
             }
         }
         stage('Test') {
