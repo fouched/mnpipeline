@@ -13,12 +13,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'gradle clean test'
+                sh 'gradle clean build'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'gradle test'
             }
         }
         stage('Deploy') {
