@@ -25,6 +25,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'gradle jar'
+                echo 'JAR Created....'
             }
         }
     }
