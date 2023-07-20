@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: mnpipeline
+  server:
+    port: 9080
 netty:
   default:
     allocator:
