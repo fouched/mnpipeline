@@ -25,8 +25,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'gradle jar'
-                echo 'JAR Created....'
                 sh 'scp /var/jenkins_home/workspace/mnpipeline/build/libs/mnpipeline-0.1-all.jar test@Ubuntu:/home/ubuntu/deploy/mnpipeline-0.1-all.jar'
                 echo 'JAR copied to server....'
             }
