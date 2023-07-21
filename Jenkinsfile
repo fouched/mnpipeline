@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 
-@Library("genericDeploy") _
 
 pipeline {
     agent any
