@@ -10,6 +10,7 @@ pipeline {
        stage('Init') {
           steps {
             library "genericDeploy@main"
+            echo 'Library loaded...'
           }
        }
         stage('Build') {
