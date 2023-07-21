@@ -26,8 +26,8 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh 'ssh test@ubuntu "/home/ubuntu/deploy/doPrep.sh"'
-                echo 'Backed up previous deploy, copying new file...'
-                sh 'scp /var/jenkins_home/workspace/mnpipeline/build/libs/*-all.jar test@Ubuntu:/home/ubuntu/deploy/mnpipeline.jar'
+                echo "Backed up previous deploy, copying new file from: ${WORKSPACE}/build/libs/*-all.jar"
+                sh "scp ${WORKSPACE}/mnpipeline/build/libs/*-all.jar test@Ubuntu:/home/ubuntu/deploy/mnpipeline.jar"
                 echo 'JAR copied to server....'
 ////                sh 'ssh test@ubuntu "/home/ubuntu/deploy/doDeploy.sh" &'
                 echo 'Server started....'
