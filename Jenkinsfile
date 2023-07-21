@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library('limehouseDeploy') _
+@Library("genericDeploy") _
 
 pipeline {
     agent any
@@ -30,7 +30,7 @@ pipeline {
 //                 sh 'ssh test@ubuntu "/home/ubuntu/deploy/mnpipeline/doDeploy.sh" &'
 //                 echo 'Server started....'
 
-                   limehouseDeploy.run('ubuntu', 'mnpipeline')
+                   genericDeploy.run('ubuntu', 'mnpipeline')
             }
         }
     }
