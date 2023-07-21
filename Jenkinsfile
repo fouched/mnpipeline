@@ -8,6 +8,11 @@ pipeline {
         gradle '7.6.1'
     }
     stages {
+       stage('Init') {
+          scripts {
+            library "genericDeploy@main"
+          }
+       }
         stage('Build') {
             steps {
                 echo 'Building...'
