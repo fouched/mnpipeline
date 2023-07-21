@@ -30,7 +30,7 @@ pipeline {
 //                 sh 'ssh test@ubuntu "/home/ubuntu/deploy/mnpipeline/doDeploy.sh" &'
 //                 echo 'Server started....'
 
-                   genericDeploy.run('ubuntu', 'mnpipeline')
+                   run('ubuntu', 'mnpipeline')
             }
         }
     }
