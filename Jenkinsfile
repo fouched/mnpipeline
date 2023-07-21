@@ -8,7 +8,7 @@ pipeline {
     }
     stages {
        stage('Init') {
-          scripts {
+          steps {
             library "genericDeploy@main"
           }
        }
