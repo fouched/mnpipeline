@@ -6,11 +6,6 @@ pipeline {
         gradle '7.6.1'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out..'
-            }
-        }
         stage('Build') {
             steps {
                 sh 'gradle clean build'
@@ -29,7 +24,7 @@ pipeline {
                 echo "Backed up previous deploy, copying new file from: ${WORKSPACE}/build/libs/*-all.jar"
                 sh "scp ${WORKSPACE}/build/libs/*-all.jar test@Ubuntu:/home/ubuntu/deploy/mnpipeline.jar"
                 echo 'JAR copied to server....'
-////                sh 'ssh test@ubuntu "/home/ubuntu/deploy/doDeploy.sh" &'
+                sh 'ssh test@ubuntu "/home/ubuntu/deploy/doDeploy.sh"'
                 echo 'Server started....'
             }
         }
