@@ -24,6 +24,7 @@ pipeline {
     }
 
     stages {
+
         stage('Build') {
             steps {
                 echo "Build ${env.PROJECT_VERSION}"
@@ -39,51 +40,51 @@ pipeline {
 //			}
 //			archive includes: 'build/reports/changelog/**'
         }
-    }
 
-    stage('Publish artifacts') {
+        stage('Publish artifacts') {
 
-        when { anyOf { branch 'master'; branch 'develop'; } }
+            when { anyOf { branch 'master'; branch 'develop'; } }
 
-        steps {
-            echo 'Publish artifacts'
+            steps {
+                echo 'Publish artifacts'
+            }
+
+    //		steps {
+    //			script {
+    //				sh 'chmod +x gradlew'
+    //				sh './gradlew publish'
+    //			}
+    //			publishHTML([
+    //					allowMissing: false,
+    //					alwaysLinkToLastBuild: false,
+    //					reportDir: 'build/reports/changelog',
+    //					reportFiles: 'CHANGELOG.html',
+    //					reportName: 'Changelog',
+    //					keepAll: false
+    //			])
+    //		}
         }
 
-//		steps {
-//			script {
-//				sh 'chmod +x gradlew'
-//				sh './gradlew publish'
-//			}
-//			publishHTML([
-//					allowMissing: false,
-//					alwaysLinkToLastBuild: false,
-//					reportDir: 'build/reports/changelog',
-//					reportFiles: 'CHANGELOG.html',
-//					reportName: 'Changelog',
-//					keepAll: false
-//			])
-//		}
-    }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'chmod +x gradlew'
 
-    stage('Deploy') {
-        steps {
-            script {
-                sh 'chmod +x gradlew'
+                    if (env.BRANCH_NAME == 'master') {
+                        echo 'Deploying to PROD'
+                        echo 'Starting release'
+    //					sh './gradlew releaseStart'
+    //					sh './gradlew releaseFinish'
+                        echo 'Release completed'
 
-                if (env.BRANCH_NAME == 'master') {
-                    echo 'Deploying to PROD'
-                    echo 'Starting release'
-//					sh './gradlew releaseStart'
-//					sh './gradlew releaseFinish'
-                    echo 'Release completed'
-
-                    TASK += 'Prod'
-                } else {
-                    echo 'Deploying to TEST'
-                    TASK += 'Dev'
+                        TASK += 'Prod'
+                    } else {
+                        echo 'Deploying to TEST'
+                        TASK += 'Dev'
+                    }
+                    echo "Deployment running task ${env.TASK}"
+    //				sh "./gradlew ${env.TASK}"
                 }
-                echo "Deployment running task ${env.TASK}"
-//				sh "./gradlew ${env.TASK}"
             }
         }
     }
