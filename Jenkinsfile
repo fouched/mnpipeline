@@ -21,14 +21,13 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
 
-        script {
-            TASK = 'deploy' + params.SERVICE + params.COUNTRY
-            if (env.BRANCH_NAME == 'master') {
-                TASK += 'Prod'
-            } else {
-                TASK += 'Dev'
-            }
+        TASK = 'deploy' + params.SERVICE + params.COUNTRY
+        if (env.BRANCH_NAME == 'master') {
+            TASK += 'Prod'
+        } else {
+            TASK += 'Dev'
         }
+
     }
 
     stages {
