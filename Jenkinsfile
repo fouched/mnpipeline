@@ -20,14 +20,7 @@ pipeline {
 
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
-
         TASK = "deploy${params.SERVICE}${params.COUNTRY}"
-        if (env.BRANCH_NAME == 'master') {
-            TASK += 'Prod'
-        } else {
-            TASK += 'Dev'
-        }
-
     }
 
     stages {
@@ -79,10 +72,12 @@ pipeline {
 //					sh './gradlew releaseStart'
 //					sh './gradlew releaseFinish'
                     echo 'Release completed'
+
+                    TASK += 'Prod'
                 } else {
                     echo 'Deploying to TEST'
+                    TASK += 'Dev'
                 }
-
                 echo "Deployment running task ${env.TASK}"
 //				sh "./gradlew ${env.TASK}"
             }
