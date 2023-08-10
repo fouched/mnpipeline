@@ -67,10 +67,10 @@ pipeline {
         }
 
         stage('Deploy Test') {
+            when {
+                branch 'develop'
+            }
             steps {
-                when {
-                    branch 'develop'
-                }
                 script {
                     sh 'chmod +x gradlew'
                     echo 'Deploying to Test'
@@ -81,10 +81,10 @@ pipeline {
         }
 
         stage('Deploy Prod') {
+            when {
+                branch 'master'
+            }
             steps {
-                when {
-                    branch 'master'
-                }
                 script {
                     sh 'chmod +x gradlew'
                     echo 'Deploying to PROD'
