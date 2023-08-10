@@ -19,7 +19,7 @@ pipeline {
     }
 
     environment {
-//        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
+        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
