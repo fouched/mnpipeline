@@ -9,9 +9,9 @@ pipeline {
         choice(name: 'COUNTRY', choices: ['Ke', 'Ug', 'Zm'], description: 'Select a country to deploy to')
     }
 
-    tools {
-        jdk 'Coretto 17'
-    }
+//    tools {
+//        jdk 'Coretto 17'
+//    }
 
     options {
         disableConcurrentBuilds(abortPrevious: true)
@@ -25,7 +25,9 @@ pipeline {
 
     stages {
         stage('Build') {
-            echo "Build ${env.PROJECT_VERSION}"
+            steps {
+                echo "Build ${env.PROJECT_VERSION}"
+            }
 //			script {
 //				try {
 //					sh 'chmod +x gradlew'
@@ -43,7 +45,9 @@ pipeline {
 
         when { anyOf { branch 'master'; branch 'develop'; } }
 
-        echo 'Publish artifacts'
+        steps {
+            echo 'Publish artifacts'
+        }
 
 //		steps {
 //			script {
