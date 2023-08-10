@@ -29,7 +29,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build version: ${env.PROJECT_VERSION}"
-                echo "Branch: ${branch}"
             }
 //			script {
 //				try {
@@ -67,25 +66,34 @@ pipeline {
     //		}
         }
 
-        stage('Deploy') {
+        stage('Deploy Test') {
             steps {
+                when {
+                    branch 'develop'
+                }
                 script {
                     sh 'chmod +x gradlew'
+                    echo 'Deploying to Test'
 
-                    if (env.BRANCH_NAME == 'master') {
-                        echo 'Deploying to PROD'
-                        echo 'Starting release'
-    //					sh './gradlew releaseStart'
-    //					sh './gradlew releaseFinish'
-                        echo 'Release completed'
+                    TASK += 'Dev'
+                }
+            }
+        }
 
-                        TASK += 'Prod'
-                    } else {
-                        echo 'Deploying to TEST'
-                        TASK += 'Dev'
-                    }
-                    echo "Deployment running task ${env.TASK}"
-    //				sh "./gradlew ${env.TASK}"
+        stage('Deploy Prod') {
+            steps {
+                when {
+                    branch 'master'
+                }
+                script {
+                    sh 'chmod +x gradlew'
+                    echo 'Deploying to PROD'
+                    echo 'Starting release'
+                    //					sh './gradlew releaseStart'
+                    //					sh './gradlew releaseFinish'
+                    echo 'Release completed'
+
+                    TASK += 'Prod'
                 }
             }
         }
