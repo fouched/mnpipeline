@@ -68,7 +68,7 @@ pipeline {
 
         stage('Deploy Test') {
             when {
-                branch 'develop'
+                anyOf { branch 'develop'; branch 'feature/*'; }
             }
             steps {
                 script {
