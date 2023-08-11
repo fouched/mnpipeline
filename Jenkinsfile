@@ -87,7 +87,7 @@ pipeline {
             steps {
                 script {
                     TASK += 'Prod'
-                    echo ">>> Deploying to Test using task: ${TASK}"
+                    echo ">>> Deploying to Prod using task: ${TASK}"
 
                     sh 'chmod +x gradlew'
                     echo '>>> Starting release'
