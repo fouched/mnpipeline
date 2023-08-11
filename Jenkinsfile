@@ -76,6 +76,9 @@ pipeline {
                     echo ">>> Deploying to Test using task: ${TASK}"
 
                     sh 'chmod +x gradlew'
+                    echo '>>> Deployment started'
+//                    sh "./gradlew ${TASK}"
+                    echo '>>> Deployment finished'
                 }
             }
         }
@@ -94,28 +97,33 @@ pipeline {
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
                     echo '>>> Release completed'
+                    echo '>>> Deployment started'
+//                    sh "./gradlew ${TASK}"
+                    echo '>>> Deployment finished'
 
                 }
             }
         }
     }
 
-//	post {
-//		success {
+	post {
+		success {
+            echo '>>> Sending success msg to Slack channel'
 //			slackSend(
 //					channel: "#unibos-build",
 //					token: "Migrated slack token",
 //					color: "good",
 //					message: "local-services ${BRANCH_NAME} version ${env.PROJECT_VERSION} success"
 //			)
-//		}
-//		failure {
+		}
+		failure {
+            echo '>>> Sending failure msg to Slack channel'
 //			slackSend(
 //					channel: "#unibos-build",
 //					token: "Migrated slack token",
 //					color: "danger",
 //					message: "local-services ${BRANCH_NAME} version ${env.PROJECT_VERSION} failed"
 //			)
-//		}
-//	}
+		}
+	}
 }
