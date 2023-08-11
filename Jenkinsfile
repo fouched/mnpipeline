@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo ">>> Build version: ${env.PROJECT_VERSION} on branch ${env.BRANCH_NAME}"
+                echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
             }
 //			script {
 //				try {
