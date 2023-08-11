@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Build version: ${env.PROJECT_VERSION}"
+                echo ">>> Build version: ${env.PROJECT_VERSION}"
             }
 //			script {
 //				try {
@@ -47,7 +47,7 @@ pipeline {
             when { anyOf { branch 'master'; branch 'develop'; } }
 
             steps {
-                echo 'Publish artifacts'
+                echo '>>> Publish artifacts'
             }
 
 //    		steps {
@@ -72,10 +72,10 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'chmod +x gradlew'
-                    echo 'Deploying to Test'
-
                     TASK += 'Dev'
+                    echo ">>> Deploying to Test using task: ${TASK}"
+
+                    sh 'chmod +x gradlew'
                 }
             }
         }
@@ -86,14 +86,15 @@ pipeline {
             }
             steps {
                 script {
+                    TASK += 'Prod'
+                    echo ">>> Deploying to Test using task: ${TASK}"
+
                     sh 'chmod +x gradlew'
-                    echo 'Deploying to PROD'
-                    echo 'Starting release'
+                    echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
-                    echo 'Release completed'
+                    echo '>>> Release completed'
 
-                    TASK += 'Prod'
                 }
             }
         }
