@@ -4,11 +4,6 @@ pipeline {
 
     agent any
 
-    parameters {
-        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-        choice(name: 'COUNTRY', choices: ['Ke', 'Ug', 'Zm'], description: 'Select a country to deploy to')
-    }
-
 //    tools {
 //        jdk 'Coretto 17'
 //    }
@@ -26,20 +21,22 @@ pipeline {
 
     stages {
 
+        when {branch 'feature/*'}
+
         stage('Build') {
             steps {
                 echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
             }
-			script {
-				try {
-					sh 'chmod +x gradlew'
-					sh './gradlew build'
-				} finally {
-					junit '**/build/test-results/test/*.xml'
-					archive includes: '**/build/test-results/test/*.xml'
-				}
-			}
-			archive includes: 'build/reports/changelog/**'
+//			script {
+//				try {
+//					sh 'chmod +x gradlew'
+//					sh './gradlew build'
+//				} finally {
+//					junit '**/build/test-results/test/*.xml'
+//					archive includes: '**/build/test-results/test/*.xml'
+//				}
+//			}
+//			archive includes: 'build/reports/changelog/**'
         }
 
     }
