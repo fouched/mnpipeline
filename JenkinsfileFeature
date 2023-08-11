@@ -21,9 +21,8 @@ pipeline {
 
     stages {
 
-        when {branch 'feature/*'}
-
         stage('Build') {
+            when {branch 'feature/*'}
             steps {
                 echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
             }
