@@ -6,7 +6,9 @@ pipeline {
 
     parameters {
         choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-        choice(name: 'COUNTRY', choices: ['Ke', 'Ug', 'Zm'], description: 'Select a country to deploy to')
+        booleanParam(defaultValue: true, name: 'KE', description: 'KE')
+        booleanParam(defaultValue: true, name: 'UG', description: 'UG')
+        booleanParam(defaultValue: true, name: 'ZM', description: 'ZM')
     }
 
 //    tools {
@@ -83,27 +85,6 @@ pipeline {
             }
         }
 
-        stage('Deploy Prod') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    TASK += 'Prod'
-                    echo ">>> Deploying to Prod using task: ${TASK}"
-
-                    sh 'chmod +x gradlew'
-                    echo '>>> Starting release'
-//                    sh './gradlew releaseStart'
-//                    sh './gradlew releaseFinish'
-                    echo '>>> Release completed'
-                    echo '>>> Deployment started'
-//                    sh "./gradlew ${TASK}"
-                    echo '>>> Deployment finished'
-
-                }
-            }
-        }
     }
 
 	post {
