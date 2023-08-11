@@ -33,7 +33,7 @@ pipeline {
                         archiveArtifacts artifacts: '**/build/test-results/test/*.xml', allowEmptyArchive: true
                     }
                 }
-                archiveArtifacts artifacts: 'build/reports/changelog/**', allowEmptyArchive: true
+                archiveArtifacts artifacts: '**/build/reports/changelog/**', allowEmptyArchive: true
             }
         }
 
