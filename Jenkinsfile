@@ -50,20 +50,20 @@ pipeline {
                 echo 'Publish artifacts'
             }
 
-    //		steps {
-    //			script {
-    //				sh 'chmod +x gradlew'
-    //				sh './gradlew publish'
-    //			}
-    //			publishHTML([
-    //					allowMissing: false,
-    //					alwaysLinkToLastBuild: false,
-    //					reportDir: 'build/reports/changelog',
-    //					reportFiles: 'CHANGELOG.html',
-    //					reportName: 'Changelog',
-    //					keepAll: false
-    //			])
-    //		}
+//    		steps {
+//    			script {
+//    				sh 'chmod +x gradlew'
+//    				sh './gradlew publish'
+//    			}
+//    			publishHTML([
+//                    allowMissing: false,
+//                    alwaysLinkToLastBuild: false,
+//                    reportDir: 'build/reports/changelog',
+//                    reportFiles: 'CHANGELOG.html',
+//                    reportName: 'Changelog',
+//                    keepAll: false
+//    			])
+//    		}
         }
 
         stage('Deploy Test') {
@@ -89,8 +89,8 @@ pipeline {
                     sh 'chmod +x gradlew'
                     echo 'Deploying to PROD'
                     echo 'Starting release'
-                    //					sh './gradlew releaseStart'
-                    //					sh './gradlew releaseFinish'
+//                    sh './gradlew releaseStart'
+//                    sh './gradlew releaseFinish'
                     echo 'Release completed'
 
                     TASK += 'Prod'
