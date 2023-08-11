@@ -30,10 +30,10 @@ pipeline {
                         sh './gradlew build'
                     } finally {
                         junit '**/build/test-results/test/*.xml'
-                        archive includes: '**/build/test-results/test/*.xml'
+                        archiveArtifacts  'build/test-results/test/*.xml', allowEmptyArchive: true
                     }
                 }
-                archive includes: 'build/reports/changelog/**'
+                archiveArtifacts 'build/reports/changelog/**', allowEmptyArchive: true
             }
         }
 
