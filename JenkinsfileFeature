@@ -16,7 +16,6 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         PROJECT_VERSION = "6.0.1"
-        TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
     stages {
@@ -26,16 +25,16 @@ pipeline {
             steps {
                 echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
             }
-//			script {
-//				try {
-//					sh 'chmod +x gradlew'
-//					sh './gradlew build'
-//				} finally {
-//					junit '**/build/test-results/test/*.xml'
-//					archive includes: '**/build/test-results/test/*.xml'
-//				}
-//			}
-//			archive includes: 'build/reports/changelog/**'
+			script {
+				try {
+					sh 'chmod +x gradlew'
+					sh './gradlew build'
+				} finally {
+					junit '**/build/test-results/test/*.xml'
+					archive includes: '**/build/test-results/test/*.xml'
+				}
+			}
+			archive includes: 'build/reports/changelog/**'
         }
 
     }
