@@ -23,14 +23,13 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         PROJECT_VERSION = "6.0.1"
-        TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
     stages {
 
         stage('Build') {
             steps {
-                echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
+                echo ">>> Build version: ${env.PROJECT_VERSION}"
             }
 //			script {
 //				try {
@@ -68,7 +67,9 @@ pipeline {
         stage('Deploy Test') {
             steps {
                 script {
-                    TASK += 'Dev'
+
+                    TASK = "deploy${params.SERVICE}${params.KE}Dev"
+
                     echo ">>> Deploying to Test using task: ${TASK}"
 
                     sh 'chmod +x gradlew'
