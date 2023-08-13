@@ -70,7 +70,7 @@ pipeline {
 
         stage('Deploy Test') {
             when {
-                anyOf { branch 'develop'; branch 'develop'; }
+                branch 'develop'
             }
             steps {
                 script {
