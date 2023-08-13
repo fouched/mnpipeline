@@ -45,9 +45,6 @@ pipeline {
         }
 
         stage('Publish artifacts') {
-
-            when { anyOf { branch 'master'; branch 'develop'; } }
-
             steps {
                 echo '>>> Publish artifacts'
             }
@@ -69,9 +66,6 @@ pipeline {
         }
 
         stage('Deploy Test') {
-            when {
-                branch 'develop'
-            }
             steps {
                 script {
                     TASK += 'Dev'
