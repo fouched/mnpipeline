@@ -74,16 +74,16 @@ pipeline {
                         TASK = "deploy${params.SERVICE}KeDev"
                         echo ">>> Deploying to Test using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    } else if (params.UG) {
-                        TASK = "deploy${params.SERVICE}KeDev"
+                    }
+                    if (params.UG) {
+                        TASK = "deploy${params.SERVICE}UgDev"
                         echo ">>> Deploying to Test using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    } else if (params.ZM) {
+                    }
+                    if (params.ZM) {
                         TASK = "deploy${params.SERVICE}ZmDev"
                         echo ">>> Deploying to Test using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    } else {
-                        echo ">>> Warning: No deployment country selected"
                     }
 
                     echo '>>> Deployment finished'
