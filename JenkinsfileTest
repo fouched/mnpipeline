@@ -72,7 +72,7 @@ pipeline {
 
                     if (params.KE) {
                         TASK = "deploy${params.SERVICE}KeDev"
-                        echo ">>> Deploying to Test using task: ${TASK}"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
                     if (params.UG) {

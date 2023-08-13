@@ -21,14 +21,13 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         PROJECT_VERSION = "6.0.1"
-        TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
     stages {
 
         stage('Build') {
             steps {
-                echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
+                echo ">>> Build version: ${env.PROJECT_VERSION}"
             }
 //			script {
 //				try {
@@ -43,9 +42,6 @@ pipeline {
         }
 
         stage('Publish artifacts') {
-
-            when { anyOf { branch 'master'; branch 'develop'; } }
-
             steps {
                 echo '>>> Publish artifacts'
             }
@@ -67,13 +63,10 @@ pipeline {
         }
 
         stage('Deploy Prod') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
-                    TASK += 'Prod'
-                    echo ">>> Deploying to Prod using task: ${TASK}"
+                    TASK = "deploy${params.SERVICE}${params.COUNTRY}Prod"
+                    echo ">>> Deploying to PROD using task: ${TASK}"
 
                     sh 'chmod +x gradlew'
                     echo '>>> Starting release'
