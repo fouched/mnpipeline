@@ -79,7 +79,7 @@ pipeline {
                         echo ">>> Deploying to Test using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     } else if (params.ZM) {
-                        TASK = "deploy${params.SERVICE}KeDev"
+                        TASK = "deploy${params.SERVICE}ZmDev"
                         echo ">>> Deploying to Test using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     } else {
