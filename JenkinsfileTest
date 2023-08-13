@@ -67,14 +67,25 @@ pipeline {
         stage('Deploy Test') {
             steps {
                 script {
-
-                    TASK = "deploy${params.SERVICE}${params.KE}Dev"
-
-                    echo ">>> Deploying to Test using task: ${TASK}"
-
                     sh 'chmod +x gradlew'
                     echo '>>> Deployment started'
-//                    sh "./gradlew ${TASK}"
+
+                    if (params.KE) {
+                        TASK = "deploy${params.SERVICE}KeDev"
+                        echo ">>> Deploying to Test using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    } else if (params.UG) {
+                        TASK = "deploy${params.SERVICE}KeDev"
+                        echo ">>> Deploying to Test using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    } else if (params.ZM) {
+                        TASK = "deploy${params.SERVICE}KeDev"
+                        echo ">>> Deploying to Test using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    } else {
+                        echo ">>> Warning: No deployment country selected"
+                    }
+
                     echo '>>> Deployment finished'
                 }
             }
