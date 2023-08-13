@@ -8,6 +8,13 @@ pipeline {
 //        jdk 'Coretto 17'
 //    }
 
+    blockOn('.*local.*', '*core.*', '*.backoffice.*') {
+        // Possible values are 'GLOBAL' and 'NODE' (default).
+        blockLevel('GLOBAL')
+        // Possible values are 'ALL', 'BUILDABLE' and 'DISABLED' (default).
+        scanQueueFor('DISABLED')
+    }
+
     options {
         disableConcurrentBuilds(abortPrevious: true)
         skipStagesAfterUnstable()
