@@ -6,9 +6,9 @@ pipeline {
 
     parameters {
         choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-        booleanParam(defaultValue: true, name: 'KE', description: 'KE')
-        booleanParam(defaultValue: true, name: 'UG', description: 'UG')
-        booleanParam(defaultValue: true, name: 'ZM', description: 'ZM')
+        booleanParam(defaultValue: true, name: 'KE', description: '')
+        booleanParam(defaultValue: true, name: 'UG', description: '')
+        booleanParam(defaultValue: true, name: 'ZM', description: '')
     }
 
 //    tools {
@@ -23,63 +23,58 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         PROJECT_VERSION = "6.0.1"
-        TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
     stages {
 
         stage('Build') {
             steps {
-                echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
+                echo ">>> Build version: ${env.PROJECT_VERSION}"
+                script {
+                    try {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew build'
+                    } finally {
+                        junit '**/build/test-results/test/*.xml'
+                        archiveArtifacts artifacts: '**/build/test-results/test/*.xml'
+                    }
+                }
+                archiveArtifacts artifacts: 'build/reports/changelog/**'
             }
-//			script {
-//				try {
-//					sh 'chmod +x gradlew'
-//					sh './gradlew build'
-//				} finally {
-//					junit '**/build/test-results/test/*.xml'
-//					archive includes: '**/build/test-results/test/*.xml'
-//				}
-//			}
-//			archive includes: 'build/reports/changelog/**'
         }
 
         stage('Publish artifacts') {
-
-            when { anyOf { branch 'master'; branch 'develop'; } }
-
             steps {
                 echo '>>> Publish artifacts'
+    			script {
+    				sh 'chmod +x gradlew'
+    				sh './gradlew publish'
+    			}
             }
-
-//    		steps {
-//    			script {
-//    				sh 'chmod +x gradlew'
-//    				sh './gradlew publish'
-//    			}
-//    			publishHTML([
-//                    allowMissing: false,
-//                    alwaysLinkToLastBuild: false,
-//                    reportDir: 'build/reports/changelog',
-//                    reportFiles: 'CHANGELOG.html',
-//                    reportName: 'Changelog',
-//                    keepAll: false
-//    			])
-//    		}
         }
 
         stage('Deploy Test') {
-            when {
-                anyOf { branch 'develop'; branch 'feature/*'; }
-            }
             steps {
                 script {
-                    TASK += 'Dev'
-                    echo ">>> Deploying to Test using task: ${TASK}"
-
                     sh 'chmod +x gradlew'
                     echo '>>> Deployment started'
-//                    sh "./gradlew ${TASK}"
+
+                    if (params.KE) {
+                        TASK = "deploy${params.SERVICE}KeDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (params.UG) {
+                        TASK = "deploy${params.SERVICE}UgDev"
+                        echo ">>> Deploying to Test using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (params.ZM) {
+                        TASK = "deploy${params.SERVICE}ZmDev"
+                        echo ">>> Deploying to Test using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
                     echo '>>> Deployment finished'
                 }
             }

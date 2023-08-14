@@ -21,59 +21,41 @@ pipeline {
     environment {
 //        PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         PROJECT_VERSION = "6.0.1"
-        TASK = "deploy${params.SERVICE}${params.COUNTRY}"
     }
 
     stages {
 
         stage('Build') {
             steps {
-                echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
+                echo ">>> Build version: ${env.PROJECT_VERSION}"
+                script {
+                    try {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew build'
+                    } finally {
+                        junit '**/build/test-results/test/*.xml'
+                        archiveArtifacts artifacts: '**/build/test-results/test/*.xml'
+                    }
+                }
+                archiveArtifacts artifacts: 'build/reports/changelog/**'
             }
-//			script {
-//				try {
-//					sh 'chmod +x gradlew'
-//					sh './gradlew build'
-//				} finally {
-//					junit '**/build/test-results/test/*.xml'
-//					archive includes: '**/build/test-results/test/*.xml'
-//				}
-//			}
-//			archive includes: 'build/reports/changelog/**'
         }
 
         stage('Publish artifacts') {
-
-            when { anyOf { branch 'master'; branch 'develop'; } }
-
             steps {
                 echo '>>> Publish artifacts'
-            }
-
-//    		steps {
 //    			script {
 //    				sh 'chmod +x gradlew'
 //    				sh './gradlew publish'
 //    			}
-//    			publishHTML([
-//                    allowMissing: false,
-//                    alwaysLinkToLastBuild: false,
-//                    reportDir: 'build/reports/changelog',
-//                    reportFiles: 'CHANGELOG.html',
-//                    reportName: 'Changelog',
-//                    keepAll: false
-//    			])
-//    		}
+            }
         }
 
         stage('Deploy Prod') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
-                    TASK += 'Prod'
-                    echo ">>> Deploying to Prod using task: ${TASK}"
+                    TASK = "deploy${params.SERVICE}${params.COUNTRY}Prod"
+                    echo ">>> Deploying to PROD using task: ${TASK}"
 
                     sh 'chmod +x gradlew'
                     echo '>>> Starting release'
