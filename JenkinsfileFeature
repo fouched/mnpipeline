@@ -22,9 +22,20 @@ pipeline {
 
     stages {
 
+        stage('CommitDetails') {
+            steps {
+                script {
+                    env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                    env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                }
+            }
+        }
+
         stage('Build') {
             when {branch 'feature/*'}
             steps {
+                echo ">>> Comitted by: ${env.GIT_AUTHOR}"
+                echo ">>> Last commit message: ${env.GIT_COMMIT_MSG}"
                 echo ">>> Build version: ${env.PROJECT_VERSION} on branch: ${env.BRANCH_NAME}"
                 script {
                     try {
