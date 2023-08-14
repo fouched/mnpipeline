@@ -56,7 +56,6 @@ pipeline {
                     TASK = "deploy${params.SERVICE}${params.COUNTRY}Prod"
                     echo ">>> Deploying to PROD using task: ${TASK}"
 
-                    sh 'chmod +x gradlew'
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'

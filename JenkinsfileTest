@@ -46,8 +46,7 @@ pipeline {
             steps {
                 echo '>>> Publish artifacts'
     			script {
-    				sh 'chmod +x gradlew'
-    				sh './gradlew publish'
+//    				sh './gradlew publish'
     			}
             }
         }
@@ -55,7 +54,6 @@ pipeline {
         stage('Deploy Test') {
             steps {
                 script {
-                    sh 'chmod +x gradlew'
                     echo '>>> Deployment started'
 
                     if (params.KE) {
