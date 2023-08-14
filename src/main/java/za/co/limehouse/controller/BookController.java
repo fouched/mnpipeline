@@ -19,7 +19,7 @@ public class BookController {
         List<Book> books = new ArrayList<>();
         Book book = new Book();
         book.setIsbn("12345");
-        book.setTitle("Fouche se boek!! 6");
+        book.setTitle("Fouche se boek!! 7");
         books.add(book);
 
         return books;
