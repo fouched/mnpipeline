@@ -76,7 +76,7 @@ pipeline {
 //					channel: "#unibos-build",
 //					token: "Migrated slack token",
 //					color: "good",
-//					message: "local-services ${BRANCH_NAME} version ${env.PROJECT_VERSION} success"
+//					message: "${env.JOB_BASE_NAME} ${BRANCH_NAME} version ${env.PROJECT_VERSION} success"
 //			)
 		}
 		failure {
@@ -85,7 +85,7 @@ pipeline {
 //					channel: "#unibos-build",
 //					token: "Migrated slack token",
 //					color: "danger",
-//					message: "local-services ${BRANCH_NAME} version ${env.PROJECT_VERSION} failed"
+//					message: "${env.JOB_BASE_NAME} ${BRANCH_NAME} version ${env.PROJECT_VERSION} failed"
 //			)
 		}
 	}
