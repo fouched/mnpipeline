@@ -45,9 +45,9 @@ pipeline {
         stage('Publish artifacts') {
             steps {
                 echo '>>> Publish artifacts'
-    			script {
+//    			script {
 //    				sh './gradlew publish'
-    			}
+//    			}
             }
         }
 
