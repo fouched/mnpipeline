@@ -124,7 +124,7 @@ pipeline {
 
         stage('Release Approval') {
             when {branch 'develop'}
-                input {message: 'Do you want to approve a release?'}
+                input {message 'Do you want to approve a release?'}
             steps {
                 script {
                     echo '>>> Starting release'
