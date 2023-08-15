@@ -128,7 +128,8 @@ pipeline {
                 branch 'develop'
             }
             input {
-                message 'Do you want to approve a release?'
+                input message: 'User input required', ok: 'Release?',
+                parameters: [choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo\nmajor', description: 'Perform a release?')]
             }
 
             steps {
