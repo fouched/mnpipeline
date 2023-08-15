@@ -124,10 +124,10 @@ pipeline {
 
         stage('Release Approval') {
             when {branch 'develop'}
+            timeout(time: 30, unit: "MINUTES") {
+                input message: 'Do you want to approve a release?', ok: 'Yes'
+            }
             steps {
-                timeout(time: 30, unit: "MINUTES") {
-                    input message: 'Do you want to approve a release?', ok: 'Yes'
-                }
                 script {
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
