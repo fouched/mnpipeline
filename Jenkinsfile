@@ -129,9 +129,8 @@ pipeline {
             }
             input {
                 message 'User input required'
-                ok: 'Perform release?'
-                parameters:
-                {
+                ok 'Perform release?'
+                parameters {
                     choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo', description: 'Perform a release?')
                 }
             }
