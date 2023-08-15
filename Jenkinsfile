@@ -6,7 +6,9 @@ pipeline {
 
     parameters {
         choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-        choice(name: 'COUNTRY', choices: ['Ke', 'Ug', 'Zm'], description: 'Select a country to deploy to')
+        booleanParam(defaultValue: true, name: 'KE', description: '')
+        booleanParam(defaultValue: true, name: 'UG', description: '')
+        booleanParam(defaultValue: true, name: 'ZM', description: '')
     }
 
 //    tools {
