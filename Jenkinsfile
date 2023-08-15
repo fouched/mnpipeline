@@ -64,7 +64,7 @@ pipeline {
             }
         }
 
-        stage('TEST Approval') {
+        stage('Test Approval') {
             when {
                 beforeInput true
                 branch 'develop'
@@ -142,7 +142,7 @@ pipeline {
             }
         }
 
-        stage('PROD Approval') {
+        stage('Prod Approval') {
             when {
                 beforeInput true
                 branch 'master'
