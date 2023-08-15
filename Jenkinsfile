@@ -80,18 +80,35 @@ pipeline {
                 script {
                     echo '>>> TEST Deployment started'
 
-                    if (KE == 'true') {
-                        TASK = "deploy${SERVICE}KeDev"
+                    if (KE == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicKeDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (UG == 'true') {
-                        TASK = "deploy${SERVICE}UgDev"
+                    if (KE == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationKeDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (ZM == 'true') {
-                        TASK = "deploy${SERVICE}ZmDev"
+
+                    if (UG == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicUgDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (UG == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationUgDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
+                    if (ZM == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicZmDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (ZM == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationZmDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
@@ -135,20 +152,37 @@ pipeline {
             steps {
 
                 script {
-                    if (KE == 'true') {
-                        TASK = "deploy${SERVICE}KeProd"
+                    if (KE == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicKeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
-    //                        sh "./gradlew ${TASK}"
+//                        sh "./gradlew ${TASK}"
                     }
-                    if (UG == 'true') {
-                        TASK = "deploy${SERVICE}UgProd"
+                    if (KE == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationKeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
-    //                        sh "./gradlew ${TASK}"
+//                        sh "./gradlew ${TASK}"
                     }
-                    if (ZM == 'true') {
-                        TASK = "deploy${SERVICE}ZmProd"
+
+                    if (UG == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicUgProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
-    //                        sh "./gradlew ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (UG == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationUgProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
+                    if (ZM == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicZmProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (ZM == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationZmProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
                     }
                 }
             }
