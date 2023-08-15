@@ -57,13 +57,71 @@ pipeline {
             }
         }
 
+        stage('Feature Approval') {
+            when {
+                beforeInput true
+                branch 'feature/*'
+            }
+            input {
+                message 'Please select options for Feature branch deployment'
+                parameters {
+                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                    booleanParam(defaultValue: false, name: 'Origination', description: '')
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                }
+            }
+
+            steps {
+                script {
+                    echo '>>> Feature branch deployment started'
+
+                    if (KE == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicKeDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (KE == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationKeDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
+                    if (UG == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicUgDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (UG == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationUgDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
+                    if (ZM == 'true' && Buslogic == 'true') {
+                        TASK = "deployBuslogicZmDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+                    if (ZM == 'true' && Origination == 'true') {
+                        TASK = "deployOriginationZmDev"
+                        echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                    }
+
+                    echo '>>> Deployment finished'
+                }
+            }
+        }
+
         stage('Test Approval') {
             when {
                 beforeInput true
                 branch 'develop'
             }
             input {
-                message 'Please select options for TEST deployment'
+                message 'Please select options for Test deployment'
                 parameters {
                         booleanParam(defaultValue: false, name: 'Buslogic', description: '')
                         booleanParam(defaultValue: false, name: 'Origination', description: '')
@@ -149,7 +207,7 @@ pipeline {
                 branch 'master'
             }
             input {
-                message 'Please select options for PROD deployment'
+                message 'Please select options for Prod deployment'
                 id 'envId'
                 ok 'Submit'
                 submitterParameter 'approverId'
