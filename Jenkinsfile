@@ -104,6 +104,9 @@ pipeline {
                     booleanParam(defaultValue: false, name: 'ZM', description: '')
                 }
             }
+            steps {
+                echo ">>>> Continue with deployment"
+            }
         }
 
 
