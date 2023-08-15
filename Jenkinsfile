@@ -95,7 +95,6 @@ pipeline {
             when {branch 'master'}
             steps {
                 input message: 'Do you want to approve the deployment?', ok: 'Yes'
-                echo ">>> Approval granted"
             }
         }
 
