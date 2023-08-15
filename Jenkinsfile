@@ -98,7 +98,9 @@ pipeline {
                 ok 'Submit'
                 submitterParameter 'approverId'
                 parameters {
-                    choice choices: ['Prod', 'Pre-Prod'], name: 'envType'
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
                 }
             }
 
