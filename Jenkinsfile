@@ -135,17 +135,17 @@ pipeline {
             steps {
 
                 script {
-                    if (KE1 == 'true') {
+                    if (KE == 'true') {
                         TASK = "deploy${SERVICE}KeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
                     }
-                    if (UG1 == 'true') {
+                    if (UG == 'true') {
                         TASK = "deploy${SERVICE}UgProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
                     }
-                    if (ZM1 == 'true') {
+                    if (ZM == 'true') {
                         TASK = "deploy${SERVICE}ZmProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
