@@ -2,7 +2,7 @@
 
 pipeline {
 
-    agent none
+    agent any
 
 //    parameters {
 //        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
@@ -30,7 +30,6 @@ pipeline {
     stages {
 
         stage('CommitDetails') {
-            agent any
             steps {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
@@ -40,7 +39,6 @@ pipeline {
         }
 
         stage('Build') {
-            agent any
             steps {
                 echo ">>> Build version: ${env.PROJECT_VERSION}  ${env.JOB_BASE_NAME}"
                 script {
@@ -68,7 +66,6 @@ pipeline {
         }
 
         stage('TEST Approval') {
-            agent any
             when {
                 branch 'develop'
             }
@@ -126,11 +123,10 @@ pipeline {
         }
 
         stage('Release Approval') {
-            agent any
             when {branch 'develop'}
+            input (message 'Do you want to approve a release?')
             steps {
                 script {
-                    input (message 'Do you want to approve a release?')
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
