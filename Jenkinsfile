@@ -63,7 +63,7 @@ pipeline {
                 branch 'develop'
             }
             input {
-                message 'Please select parameters for TEST deployment/approval'
+                message 'Please select options for TEST deployment'
                 parameters {
                         booleanParam(defaultValue: false, name: 'Buslogic', description: '')
                         booleanParam(defaultValue: false, name: 'Origination', description: '')
@@ -124,7 +124,7 @@ pipeline {
                 message 'User input required'
                 ok 'Perform release?'
                 parameters {
-                    choice(name: 'Perform Release?', choices: 'Yes\nNo', description: '')
+                    choice(name: 'Release', choices: 'Yes\nNo', description: 'Perform release?')
                 }
             }
 
@@ -149,7 +149,7 @@ pipeline {
                 branch 'master'
             }
             input {
-                message 'Please select parameters for PROD deployment/approval'
+                message 'Please select options for PROD deployment'
                 id 'envId'
                 ok 'Submit'
                 submitterParameter 'approverId'
