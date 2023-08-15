@@ -94,8 +94,8 @@ pipeline {
         stage('Prod Approval') {
             when {branch 'master'}
             steps {
-                input message: 'Do you want to approve the deployment?', ok: 'Yes'
-                parameterDefinitions {
+                input {
+                    message 'Do you want to approve the deployment?'
                     parameters {
                         booleanParam(defaultValue: false, name: 'KE', description: '')
                         booleanParam(defaultValue: false, name: 'UG', description: '')
