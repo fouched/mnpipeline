@@ -113,22 +113,23 @@ pipeline {
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
                     echo '>>> Release completed'
-                }
 
-                if (${KE1}) {
-                    TASK = "deploy${params.SERVICE}KeProd"
-                    echo ">>> Deploying to PROD using task: ${TASK}"
-//                        sh "./gradlew ${TASK}"
-                }
-                if (${UG1}) {
-                    TASK = "deploy${params.SERVICE}UgProd"
-                    echo ">>> Deploying to PROD using task: ${TASK}"
-//                        sh "./gradlew ${TASK}"
-                }
-                if (${ZM1}) {
-                    TASK = "deploy${params.SERVICE}ZmProd"
-                    echo ">>> Deploying to PROD using task: ${TASK}"
-//                        sh "./gradlew ${TASK}"
+
+                    if (${KE1}) {
+                        TASK = "deploy${params.SERVICE}KeProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+    //                        sh "./gradlew ${TASK}"
+                    }
+                    if (${UG1}) {
+                        TASK = "deploy${params.SERVICE}UgProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+    //                        sh "./gradlew ${TASK}"
+                    }
+                    if (${ZM1}) {
+                        TASK = "deploy${params.SERVICE}ZmProd"
+                        echo ">>> Deploying to PROD using task: ${TASK}"
+    //                        sh "./gradlew ${TASK}"
+                    }
                 }
             }
         }
