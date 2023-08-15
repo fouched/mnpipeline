@@ -4,12 +4,12 @@ pipeline {
 
     agent any
 
-    parameters {
-        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-        booleanParam(defaultValue: false, name: 'KE', description: '')
-        booleanParam(defaultValue: false, name: 'UG', description: '')
-        booleanParam(defaultValue: false, name: 'ZM', description: '')
-    }
+//    parameters {
+//        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
+//        booleanParam(defaultValue: false, name: 'KE', description: '')
+//        booleanParam(defaultValue: false, name: 'UG', description: '')
+//        booleanParam(defaultValue: false, name: 'ZM', description: '')
+//    }
 
 //    tools {
 //        jdk 'Coretto 17'
@@ -99,6 +99,7 @@ pipeline {
                 ok 'Submit'
                 submitterParameter 'approverId'
                 parameters {
+                    choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
                     booleanParam(defaultValue: false, name: 'KE1', description: '')
                     booleanParam(defaultValue: false, name: 'UG1', description: '')
                     booleanParam(defaultValue: false, name: 'ZM1', description: '')
@@ -106,7 +107,6 @@ pipeline {
             }
             steps {
                 echo ">>>> Continue with deployment"
-                echo ">>> PROD Deployment started for ${params.SERVICE} in KE ${KE1} UG ${UG1} ZM ${ZM1}"
 
                 script {
                     echo '>>> Starting release'
