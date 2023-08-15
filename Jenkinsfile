@@ -124,9 +124,7 @@ pipeline {
 
         stage('Release Approval') {
             when {branch 'develop'}
-            timeout(time: 30, unit: "MINUTES") {
                 input message: 'Do you want to approve a release?', ok: 'Yes'
-            }
             steps {
                 script {
                     echo '>>> Starting release'
