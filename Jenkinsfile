@@ -115,17 +115,17 @@ pipeline {
                     echo '>>> Release completed'
 
 
-                    if (KE1) {
+                    if (${KE1} == 'true') {
                         TASK = "deploy${params.SERVICE}KeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
                     }
-                    if (UG1) {
+                    if (${UG1} == 'true') {
                         TASK = "deploy${params.SERVICE}UgProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
                     }
-                    if (ZM1) {
+                    if (${ZM1} == true) {
                         TASK = "deploy${params.SERVICE}ZmProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
     //                        sh "./gradlew ${TASK}"
