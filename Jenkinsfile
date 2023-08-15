@@ -98,11 +98,11 @@ pipeline {
                 id 'envId'
                 ok 'Submit'
                 submitterParameter 'approverId'
-                parameters {[
-                    booleanParam(defaultValue: false, name: 'KE1', description: ''),
-                    booleanParam(defaultValue: false, name: 'UG1', description: ''),
+                parameters {
+                    booleanParam(defaultValue: false, name: 'KE1', description: '')
+                    booleanParam(defaultValue: false, name: 'UG1', description: '')
                     booleanParam(defaultValue: false, name: 'ZM1', description: '')
-                ]}
+                }
             }
             steps {
                 echo ">>>> Continue with deployment"
