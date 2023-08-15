@@ -106,6 +106,7 @@ pipeline {
             }
             steps {
                 echo ">>>> Continue with deployment"
+                echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
             }
         }
 
