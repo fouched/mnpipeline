@@ -106,7 +106,7 @@ pipeline {
             }
             steps {
                 echo ">>>> Continue with deployment"
-                echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
+                echo ">>> PROD Deployment started for ${params.SERVICE} in KE ${KE1} UG ${UG1} ZM ${ZM1}"
 
                 script {
                     echo '>>> Starting release'
