@@ -2,7 +2,7 @@
 
 pipeline {
 
-    agent any
+    agent none
 
 //    parameters {
 //        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
@@ -30,6 +30,7 @@ pipeline {
     stages {
 
         stage('CommitDetails') {
+            agent any
             steps {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
@@ -39,6 +40,7 @@ pipeline {
         }
 
         stage('Build') {
+            agent any
             steps {
                 echo ">>> Build version: ${env.PROJECT_VERSION}  ${env.JOB_BASE_NAME}"
                 script {
@@ -54,6 +56,7 @@ pipeline {
         }
 
         stage('Publish artifacts') {
+            agent any
             when { branch 'develop'}
             steps {
                 echo '>>> Publish artifacts'
@@ -65,22 +68,24 @@ pipeline {
         }
 
         stage('TEST Approval') {
+            agent any
             when {
                 branch 'develop'
             }
 
-            input {
+            input (
                 message 'Please select parameters for TEST deployment/approval'
-                parameters {
-                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-                    booleanParam(defaultValue: false, name: 'Origination', description: '')
-                    booleanParam(defaultValue: false, name: 'KE', description: '')
-                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                parameters (
+                    booleanParam(defaultValue: false, name: 'Buslogic', description: ''),
+                    booleanParam(defaultValue: false, name: 'Origination', description: ''),
+                    booleanParam(defaultValue: false, name: 'KE', description: ''),
+                    booleanParam(defaultValue: false, name: 'UG', description: ''),
                     booleanParam(defaultValue: false, name: 'ZM', description: '')
-                }
-            }
+                )
+            )
 
             steps {
+                agent any
                 script {
                     echo '>>> TEST Deployment started'
 
@@ -123,10 +128,11 @@ pipeline {
         }
 
         stage('Release Approval') {
+            agent any
             when {branch 'develop'}
-                input {message 'Do you want to approve a release?'}
             steps {
                 script {
+                    input (message 'Do you want to approve a release?')
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
