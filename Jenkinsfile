@@ -64,7 +64,7 @@ pipeline {
             }
         }
 
-        stage('TEST Deployment Approval') {
+        stage('TEST Approval') {
             when {branch 'develop'}
             input {
                 message 'Please select parameters for TEST deployment/approval'
@@ -117,7 +117,7 @@ pipeline {
             }
         }
 
-        stage('PROD Deployment Approval') {
+        stage('PROD Approval') {
             when {branch 'master'}
             input {
                 message 'Please select parameters for PROD deployment/approval'
