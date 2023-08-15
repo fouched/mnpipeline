@@ -132,7 +132,7 @@ pipeline {
                 ok: 'Perform release?'
                 parameters:
                 {
-                    choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo\nmajor', description: 'Perform a release?')
+                    choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo', description: 'Perform a release?')
                 }
             }
 
