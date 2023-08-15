@@ -95,6 +95,11 @@ pipeline {
             when {branch 'master'}
             steps {
                 input message: 'Do you want to approve the deployment?', ok: 'Yes'
+                parameters {
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                }
             }
         }
 
@@ -117,17 +122,17 @@ pipeline {
                     echo '>>> PROD Deployment started'
 
                     if (params.KE) {
-                        TASK = "deploy${params.SERVICE}KeProd"
+                        TASK = "deploy${params.KE}KeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
                     if (params.UG) {
-                        TASK = "deploy${params.SERVICE}UgProd"
+                        TASK = "deploy${params.UG}UgProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
                     if (params.ZM) {
-                        TASK = "deploy${params.SERVICE}ZmProd"
+                        TASK = "deploy${params.ZM}ZmProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
