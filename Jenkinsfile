@@ -54,7 +54,6 @@ pipeline {
         }
 
         stage('Publish artifacts') {
-            agent any
             when { branch 'develop'}
             steps {
                 echo '>>> Publish artifacts'
@@ -67,6 +66,7 @@ pipeline {
 
         stage('TEST Approval') {
             when {
+                beforeInput true
                 branch 'develop'
             }
             input {
@@ -123,8 +123,14 @@ pipeline {
         }
 
         stage('Release Approval') {
-            when {branch 'develop'}
-            input {message 'Do you want to approve a release?'}
+            when {
+                beforeInput true
+                branch 'develop'
+            }
+            input {
+                message 'Do you want to approve a release?'
+            }
+
             steps {
                 script {
                     echo '>>> Starting release'
@@ -137,7 +143,10 @@ pipeline {
         }
 
         stage('PROD Approval') {
-            when {branch 'master'}
+            when {
+                beforeInput true
+                branch 'master'
+            }
             input {
                 message 'Please select parameters for PROD deployment/approval'
                 id 'envId'
@@ -152,7 +161,6 @@ pipeline {
                 }
             }
             steps {
-
                 script {
                     if (KE == 'true' && Buslogic == 'true') {
                         TASK = "deployBuslogicKeProd"
