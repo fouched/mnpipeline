@@ -103,11 +103,6 @@ pipeline {
                     booleanParam(defaultValue: false, name: 'ZM', description: '')
                 }
             }
-
-            steps {
-                echo "Deployment approved to ${envType} by ${approverId}."
-
-            }
         }
 
         stage('Prod Approval') {
