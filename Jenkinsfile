@@ -131,16 +131,20 @@ pipeline {
                 message 'User input required'
                 ok 'Perform release?'
                 parameters {
-                    choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo', description: 'Perform a release?')
+                    choice(name: 'Release', choices: 'Yes\nNo', description: '')
                 }
             }
 
             steps {
                 script {
-                    echo '>>> Starting release'
-//                    sh './gradlew releaseStart'
-//                    sh './gradlew releaseFinish'
-                    echo '>>> Release completed'
+                    if (Release == 'Yes') {
+                        echo '>>> Starting release'
+//                        sh './gradlew releaseStart'
+//                        sh './gradlew releaseFinish'
+                        echo '>>> Release completed'
+                    } else {
+                        echo '>>> Release not required'
+                    }
                 }
 
             }
