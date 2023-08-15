@@ -70,16 +70,14 @@ pipeline {
             }
 
             steps {
-                timeout(time: 30, unit: "MINUTES") {
-                    input {
-                        message 'Please select parameters for TEST deployment/approval'
-                        parameters {
-                            booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-                            booleanParam(defaultValue: false, name: 'Origination', description: '')
-                            booleanParam(defaultValue: false, name: 'KE', description: '')
-                            booleanParam(defaultValue: false, name: 'UG', description: '')
-                            booleanParam(defaultValue: false, name: 'ZM', description: '')
-                        }
+                input {
+                    message 'Please select parameters for TEST deployment/approval'
+                    parameters {
+                        booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                        booleanParam(defaultValue: false, name: 'Origination', description: '')
+                        booleanParam(defaultValue: false, name: 'KE', description: '')
+                        booleanParam(defaultValue: false, name: 'UG', description: '')
+                        booleanParam(defaultValue: false, name: 'ZM', description: '')
                     }
                 }
                 script {
