@@ -93,10 +93,11 @@ pipeline {
 
         stage('Prod Approval') {
             when {branch 'master'}
+            input {
+                message: 'Do you want to approve the deployment?'
+            }
             steps {
-                input {
-                    message: 'Do you want to approve the deployment?'
-                }
+                echo ">>> Approval granted"
             }
         }
 
