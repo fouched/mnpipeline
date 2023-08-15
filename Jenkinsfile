@@ -107,49 +107,72 @@ pipeline {
             steps {
                 echo ">>>> Continue with deployment"
                 echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
-            }
-        }
 
-
-        stage('Release') {
-            when {branch 'master'}
-            steps {
                 script {
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
                     echo '>>> Release completed'
                 }
-            }
-        }
 
-        stage('Prod Deploy') {
-            when {branch 'master'}
-            steps {
-                script {
-                    echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
-
-                    if (params.KE1) {
-                        TASK = "deploy${params.SERVICE}KeProd"
-                        echo ">>> Deploying to PROD using task: ${TASK}"
+                if (KE1) {
+                    TASK = "deploy${params.SERVICE}KeProd"
+                    echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    }
-                    if (params.UG1) {
-                        TASK = "deploy${params.SERVICE}UgProd"
-                        echo ">>> Deploying to PROD using task: ${TASK}"
+                }
+                if (UG1) {
+                    TASK = "deploy${params.SERVICE}UgProd"
+                    echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    }
-                    if (params.ZM1) {
-                        TASK = "deploy${params.SERVICE}ZmProd"
-                        echo ">>> Deploying to PROD using task: ${TASK}"
+                }
+                if (ZM1) {
+                    TASK = "deploy${params.SERVICE}ZmProd"
+                    echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
-                    }
-
-                    echo '>>> Deployment finished'
-
                 }
             }
         }
+
+
+//        stage('Release') {
+//            when {branch 'master'}
+//            steps {
+//                script {
+//                    echo '>>> Starting release'
+////                    sh './gradlew releaseStart'
+////                    sh './gradlew releaseFinish'
+//                    echo '>>> Release completed'
+//                }
+//            }
+//        }
+
+//        stage('Prod Deploy') {
+//            when {branch 'master'}
+//            steps {
+//                script {
+//                    echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
+//
+//                    if (params.KE1) {
+//                        TASK = "deploy${params.SERVICE}KeProd"
+//                        echo ">>> Deploying to PROD using task: ${TASK}"
+////                        sh "./gradlew ${TASK}"
+//                    }
+//                    if (params.UG1) {
+//                        TASK = "deploy${params.SERVICE}UgProd"
+//                        echo ">>> Deploying to PROD using task: ${TASK}"
+////                        sh "./gradlew ${TASK}"
+//                    }
+//                    if (params.ZM1) {
+//                        TASK = "deploy${params.SERVICE}ZmProd"
+//                        echo ">>> Deploying to PROD using task: ${TASK}"
+////                        sh "./gradlew ${TASK}"
+//                    }
+//
+//                    echo '>>> Deployment finished'
+//
+//                }
+//            }
+//        }
     }
 
 	post {
