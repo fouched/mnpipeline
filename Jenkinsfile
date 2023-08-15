@@ -126,7 +126,7 @@ pipeline {
             when {branch 'master'}
             steps {
                 script {
-                    echo ">>> PROD Deployment started for ${params.SERVICE}"
+                    echo ">>> PROD Deployment started for ${params.SERVICE} in ${params.KE1}"
 
                     if (params.KE1) {
                         TASK = "deploy${params.SERVICE}KeProd"
