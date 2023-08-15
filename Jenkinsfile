@@ -96,11 +96,6 @@ pipeline {
             steps {
                 input {
                     message 'Do you want to approve the deployment?'
-                    parameters {
-                        booleanParam(defaultValue: false, name: 'KE', description: '')
-                        booleanParam(defaultValue: false, name: 'UG', description: '')
-                        booleanParam(defaultValue: false, name: 'ZM', description: '')
-                    }
                 }
             }
         }
