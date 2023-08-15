@@ -54,7 +54,7 @@ pipeline {
         }
 
         stage('Publish artifacts') {
-            when { anyOf { branch 'master'; branch 'develop' } }
+            when { branch 'develop'}
             steps {
                 echo '>>> Publish artifacts'
 //    			script {
@@ -64,24 +64,34 @@ pipeline {
             }
         }
 
-        stage('Deploy Test') {
+        stage('TEST Deployment Approval') {
             when {branch 'develop'}
+            input {
+                message 'Please select parameters for TEST deployment/approval'
+                parameters {
+                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                    booleanParam(defaultValue: false, name: 'Origination', description: '')
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                }
+            }
             steps {
                 script {
                     echo '>>> TEST Deployment started'
 
-                    if (params.KE) {
-                        TASK = "deploy${params.SERVICE}KeDev"
+                    if (KE == 'true') {
+                        TASK = "deploy${SERVICE}KeDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (params.UG) {
-                        TASK = "deploy${params.SERVICE}UgDev"
+                    if (UG == 'true') {
+                        TASK = "deploy${SERVICE}UgDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (params.ZM) {
-                        TASK = "deploy${params.SERVICE}ZmDev"
+                    if (ZM == 'true') {
+                        TASK = "deploy${SERVICE}ZmDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
@@ -91,30 +101,40 @@ pipeline {
             }
         }
 
-        stage('Approval') {
-            when {branch 'master'}
-            input {
-                message 'Please select environment for approval'
-                id 'envId'
-                ok 'Submit'
-                submitterParameter 'approverId'
-                parameters {
-                    choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-                    booleanParam(defaultValue: false, name: 'KE1', description: '')
-                    booleanParam(defaultValue: false, name: 'UG1', description: '')
-                    booleanParam(defaultValue: false, name: 'ZM1', description: '')
-                }
-            }
+        stage('Release Approval') {
+            when {branch 'develop'}
             steps {
-                echo ">>>> Continue with deployment"
-
+                timeout(time: 30, unit: "MINUTES") {
+                    input message: 'Do you want to approve a release?', ok: 'Yes'
+                }
                 script {
                     echo '>>> Starting release'
 //                    sh './gradlew releaseStart'
 //                    sh './gradlew releaseFinish'
                     echo '>>> Release completed'
+                }
 
+            }
+        }
 
+        stage('PROD Deployment Approval') {
+            when {branch 'master'}
+            input {
+                message 'Please select parameters for PROD deployment/approval'
+                id 'envId'
+                ok 'Submit'
+                submitterParameter 'approverId'
+                parameters {
+                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                    booleanParam(defaultValue: false, name: 'Origination', description: '')
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                }
+            }
+            steps {
+
+                script {
                     if (KE1 == 'true') {
                         TASK = "deploy${SERVICE}KeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
@@ -134,46 +154,6 @@ pipeline {
             }
         }
 
-
-//        stage('Release') {
-//            when {branch 'master'}
-//            steps {
-//                script {
-//                    echo '>>> Starting release'
-////                    sh './gradlew releaseStart'
-////                    sh './gradlew releaseFinish'
-//                    echo '>>> Release completed'
-//                }
-//            }
-//        }
-
-//        stage('Prod Deploy') {
-//            when {branch 'master'}
-//            steps {
-//                script {
-//                    echo ">>> PROD Deployment started for ${params.SERVICE} in ${KE1}"
-//
-//                    if (params.KE1) {
-//                        TASK = "deploy${params.SERVICE}KeProd"
-//                        echo ">>> Deploying to PROD using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                    }
-//                    if (params.UG1) {
-//                        TASK = "deploy${params.SERVICE}UgProd"
-//                        echo ">>> Deploying to PROD using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                    }
-//                    if (params.ZM1) {
-//                        TASK = "deploy${params.SERVICE}ZmProd"
-//                        echo ">>> Deploying to PROD using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                    }
-//
-//                    echo '>>> Deployment finished'
-//
-//                }
-//            }
-//        }
     }
 
 	post {
