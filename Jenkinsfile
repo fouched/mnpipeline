@@ -127,10 +127,11 @@ pipeline {
                 beforeInput true
                 branch 'develop'
             }
-            input {
+            script {
                 input message: 'User input required', ok: 'Release?',
                 parameters: [choice(name: 'RELEASE_SCOPE', choices: 'Yes\nNo\nmajor', description: 'Perform a release?')]
             }
+
 
             steps {
                 script {
