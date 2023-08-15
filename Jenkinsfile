@@ -91,9 +91,10 @@ pipeline {
             }
         }
 
-        stage('Approve based on environment lead') {
+        stage('Approval') {
+            when {branch 'master'}
             input {
-                message 'Please select environment'
+                message 'Please select environment for approval'
                 id 'envId'
                 ok 'Submit'
                 submitterParameter 'approverId'
@@ -105,12 +106,6 @@ pipeline {
             }
         }
 
-        stage('Prod Approval') {
-            when {branch 'master'}
-            steps {
-                input message: 'Do you want to approve the deployment?', ok: 'Yes'
-            }
-        }
 
         stage('Release') {
             when {branch 'master'}
