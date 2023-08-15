@@ -99,9 +99,9 @@ pipeline {
                 ok 'Submit'
                 submitterParameter 'approverId'
                 parameters {
-                    booleanParam(defaultValue: false, name: 'KE', description: '')
-                    booleanParam(defaultValue: false, name: 'UG', description: '')
-                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                    booleanParam(defaultValue: false, name: 'KE1', description: '')
+                    booleanParam(defaultValue: false, name: 'UG1', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM1', description: '')
                 }
             }
             steps {
@@ -126,20 +126,20 @@ pipeline {
             when {branch 'master'}
             steps {
                 script {
-                    echo '>>> PROD Deployment started'
+                    echo ">>> PROD Deployment started for ${params.SERVICE}"
 
                     if (params.KE) {
-                        TASK = "deploy${params.KE}KeProd"
+                        TASK = "deploy${params.SERVICE}KeProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
                     if (params.UG) {
-                        TASK = "deploy${params.UG}UgProd"
+                        TASK = "deploy${params.SERVICE}UgProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
                     if (params.ZM) {
-                        TASK = "deploy${params.ZM}ZmProd"
+                        TASK = "deploy${params.SERVICE}ZmProd"
                         echo ">>> Deploying to PROD using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
