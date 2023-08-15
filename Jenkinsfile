@@ -95,7 +95,7 @@ pipeline {
             when {branch 'master'}
             steps {
                 input {
-                    message 'Do you want to approve the deployment?'
+                    message: 'Do you want to approve the deployment?'
                 }
             }
         }
