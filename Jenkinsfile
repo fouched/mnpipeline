@@ -4,13 +4,6 @@ pipeline {
 
     agent any
 
-//    parameters {
-//        choice(name: 'SERVICE', choices: ['Buslogic', 'Origination'], description: 'Select a service to deploy')
-//        booleanParam(defaultValue: false, name: 'KE', description: '')
-//        booleanParam(defaultValue: false, name: 'UG', description: '')
-//        booleanParam(defaultValue: false, name: 'ZM', description: '')
-//    }
-
 //    tools {
 //        jdk 'Coretto 17'
 //    }
