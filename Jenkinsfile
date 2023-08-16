@@ -90,9 +90,9 @@ pipeline {
                                                 booleanParam(defaultValue: false, name: 'ZM', description: '')
                                         ]
 
-                        echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE} - ${userInput.UG}"
+                        echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE}"
 
-                        if (userInput.KE == 'true' && userInput.Buslogic == 'true') {
+                        if (userInput.KE == true && userInput.Buslogic == true) {
                             TASK = "deployBuslogicKeDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
