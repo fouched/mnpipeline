@@ -63,21 +63,6 @@ pipeline {
                 branch 'feature/*'
             }
 
-//            timeout(time: 60, unit: "SECONDS") {
-//                input 'Do you want to proceed to the Deployment?'
-//            }
-
-//            input {
-//                message 'Please select options for Feature branch deployment'
-//                parameters {
-//                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-//                    booleanParam(defaultValue: false, name: 'Origination', description: '')
-//                    booleanParam(defaultValue: false, name: 'KE', description: '')
-//                    booleanParam(defaultValue: false, name: 'UG', description: '')
-//                    booleanParam(defaultValue: false, name: 'ZM', description: '')
-//                }
-//            }
-
             steps {
                 timeout(time: 10, unit: 'SECONDS') {
                     script {
@@ -90,36 +75,36 @@ pipeline {
                                                 booleanParam(defaultValue: false, name: 'ZM', description: '')
                                         ]
 
-                        echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE}"
+                        echo ">>> Feature branch deployment started"
 
                         if (userInput.KE && userInput.Buslogic) {
                             TASK = "deployBuslogicKeDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                         }
-                        if (userInput.KE == 'true' && userInput.Origination == 'true') {
+                        if (userInput.KE && userInput.Origination) {
                             TASK = "deployOriginationKeDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                         }
 
-                        if (userInput.UG == 'true' && userInput.Buslogic == 'true') {
+                        if (userInput.UG && userInput.Buslogic) {
                             TASK = "deployBuslogicUgDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                         }
-                        if (userInput.UG == 'true' && userInput.Origination == 'true') {
+                        if (userInput.UG && userInput.Origination) {
                             TASK = "deployOriginationUgDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                         }
 
-                        if (userInput.ZM == 'true' && userInput.Buslogic == 'true') {
+                        if (userInput.ZM && userInput.Buslogic) {
                             TASK = "deployBuslogicZmDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                         }
-                        if (userInput.ZM == 'true' && userInput.Origination == 'true') {
+                        if (userInput.ZM && userInput.Origination) {
                             TASK = "deployOriginationZmDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
@@ -136,49 +121,58 @@ pipeline {
                 beforeInput true
                 branch 'develop'
             }
-            input {
-                message 'Please select options for Test deployment'
-                parameters {
-                        booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-                        booleanParam(defaultValue: false, name: 'Origination', description: '')
-                        booleanParam(defaultValue: false, name: 'KE', description: '')
-                        booleanParam(defaultValue: false, name: 'UG', description: '')
-                        booleanParam(defaultValue: false, name: 'ZM', description: '')
-                    }
-            }
+//            input {
+//                message 'Please select options for Test deployment'
+//                parameters {
+//                        booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+//                        booleanParam(defaultValue: false, name: 'Origination', description: '')
+//                        booleanParam(defaultValue: false, name: 'KE', description: '')
+//                        booleanParam(defaultValue: false, name: 'UG', description: '')
+//                        booleanParam(defaultValue: false, name: 'ZM', description: '')
+//                    }
+//            }
 
             steps {
                 script {
-                    echo '>>> TEST Deployment started'
+                    def userInput = input message: 'Deployment options:',
+                            parameters: [
+                                    booleanParam(defaultValue: false, name: 'Buslogic', description: ''),
+                                    booleanParam(defaultValue: false, name: 'Origination', description: ''),
+                                    booleanParam(defaultValue: false, name: 'KE', description: ''),
+                                    booleanParam(defaultValue: false, name: 'UG', description: ''),
+                                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+                            ]
 
-                    if (KE == 'true' && Buslogic == 'true') {
+                    echo ">>> Feature branch deployment started"
+
+                    if (userInput.KE && userInput.Buslogic) {
                         TASK = "deployBuslogicKeDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (KE == 'true' && Origination == 'true') {
+                    if (userInput.KE && userInput.Origination) {
                         TASK = "deployOriginationKeDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
 
-                    if (UG == 'true' && Buslogic == 'true') {
+                    if (userInput.UG && userInput.Buslogic) {
                         TASK = "deployBuslogicUgDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (UG == 'true' && Origination == 'true') {
+                    if (userInput.UG && userInput.Origination) {
                         TASK = "deployOriginationUgDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
 
-                    if (ZM == 'true' && Buslogic == 'true') {
+                    if (userInput.ZM && userInput.Buslogic) {
                         TASK = "deployBuslogicZmDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
                     }
-                    if (ZM == 'true' && Origination == 'true') {
+                    if (userInput.ZM && userInput.Origination) {
                         TASK = "deployOriginationZmDev"
                         echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
