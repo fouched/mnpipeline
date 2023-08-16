@@ -16,8 +16,8 @@ pipeline {
     }
 
     environment {
+        PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").rootProject.name}"
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
-//        PROJECT_VERSION = "6.0.1"
     }
 
     stages {
