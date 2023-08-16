@@ -263,32 +263,38 @@ pipeline {
 
     }
 
-	post {
-		success {
+    post {
+        success {
             echo '>>> Sending success msg to Slack channel'
-//			slackSend(
-//					channel: "#unibos-build",
-//					token: "Migrated slack token",
-//					color: "good",
+//            slackSend(
+//                    channel: "#unibos-build",
+//                    token: "Migrated slack token",
+//                    color: "good",
 //                    message: """
-//						Job: ${env.JOB_BASE_NAME} version ${env.PROJECT_VERSION} success
-//						Comitted by: ${env.GIT_AUTHOR}
-//						Last commit message: ${env.GIT_COMMIT_MSG}
-//					"""
-//			)
-		}
-		failure {
+//Project: ${env.PROJECT}
+//Job: ${env.JOB_NAME}
+//Version: ${env.PROJECT_VERSION}
+//Comitted by: ${env.GIT_AUTHOR}
+//Last commit message: ${env.GIT_COMMIT_MSG}
+//Status: Success
+//"""
+//            )
+        }
+        failure {
             echo '>>> Sending failure msg to Slack channel'
-//			slackSend(
-//					channel: "#unibos-build",
-//					token: "Migrated slack token",
-//					color: "danger",
+//            slackSend(
+//                    channel: "#unibos-build",
+//                    token: "Migrated slack token",
+//                    color: "danger",
 //                    message: """
-//						Job: ${env.JOB_BASE_NAME} version ${env.PROJECT_VERSION} failed
-//						Comitted by: ${env.GIT_AUTHOR}
-//						Last commit message: ${env.GIT_COMMIT_MSG}
-//					"""
-//			)
-		}
-	}
+//Project: ${env.PROJECT}
+//Job: ${env.JOB_NAME}
+//Version: ${env.PROJECT_VERSION}
+//Comitted by: ${env.GIT_AUTHOR}
+//Last commit message: ${env.GIT_COMMIT_MSG}
+//Status: Failure
+//"""
+//            )
+        }
+    }
 }
