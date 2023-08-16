@@ -92,7 +92,7 @@ pipeline {
 
                         echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE}"
 
-                        if (userInput.KE == true && userInput.Buslogic == true) {
+                        if (userInput.KE && userInput.Buslogic) {
                             TASK = "deployBuslogicKeDev"
                             echo ">>> Deploying to TEST using task: ${TASK}"
 //                        sh "./gradlew ${TASK}"
