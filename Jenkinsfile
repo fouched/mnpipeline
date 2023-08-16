@@ -92,38 +92,38 @@ pipeline {
 
                         echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE} - ${userInput.UG}"
 
-//                        if (KE == 'true' && Buslogic == 'true') {
-//                            TASK = "deployBuslogicKeDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
-//                        if (KE == 'true' && Origination == 'true') {
-//                            TASK = "deployOriginationKeDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
-//
-//                        if (UG == 'true' && Buslogic == 'true') {
-//                            TASK = "deployBuslogicUgDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
-//                        if (UG == 'true' && Origination == 'true') {
-//                            TASK = "deployOriginationUgDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
-//
-//                        if (ZM == 'true' && Buslogic == 'true') {
-//                            TASK = "deployBuslogicZmDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
-//                        if (ZM == 'true' && Origination == 'true') {
-//                            TASK = "deployOriginationZmDev"
-//                            echo ">>> Deploying to TEST using task: ${TASK}"
-////                        sh "./gradlew ${TASK}"
-//                        }
+                        if (userInput.KE == 'true' && userInput.Buslogic == 'true') {
+                            TASK = "deployBuslogicKeDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
+                        if (userInput.KE == 'true' && userInput.Origination == 'true') {
+                            TASK = "deployOriginationKeDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
+
+                        if (userInput.UG == 'true' && userInput.Buslogic == 'true') {
+                            TASK = "deployBuslogicUgDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
+                        if (userInput.UG == 'true' && userInput.Origination == 'true') {
+                            TASK = "deployOriginationUgDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
+
+                        if (userInput.ZM == 'true' && userInput.Buslogic == 'true') {
+                            TASK = "deployBuslogicZmDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
+                        if (userInput.ZM == 'true' && userInput.Origination == 'true') {
+                            TASK = "deployOriginationZmDev"
+                            echo ">>> Deploying to TEST using task: ${TASK}"
+//                        sh "./gradlew ${TASK}"
+                        }
 
                         echo '>>> Deployment finished'
                     }
