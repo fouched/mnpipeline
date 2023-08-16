@@ -81,8 +81,15 @@ pipeline {
             steps {
                 timeout(time: 10, unit: 'SECONDS') {
                     script {
-                        def userInput = input message: 'Please enter a value:', parameters: [string(defaultValue: 'default value', description: 'Enter a value', name: 'inputValue')]
-                        echo "User input: ${userInput}"
+                        input message: 'Deployment options:',
+                        parameters: [
+                        booleanParam(defaultValue: false, name: 'Buslogic', description: ''),
+                        booleanParam(defaultValue: false, name: 'Origination', description: ''),
+                        booleanParam(defaultValue: false, name: 'KE', description: ''),
+                        booleanParam(defaultValue: false, name: 'UG', description: ''),
+                        booleanParam(defaultValue: false, name: 'ZM', description: '')
+                        ]
+
                     }
                 }
                 script {
