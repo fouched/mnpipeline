@@ -82,15 +82,15 @@ pipeline {
                 timeout(time: 10, unit: 'SECONDS') {
                     script {
                         input message: 'Deployment options:',
-                                parameters: [
-                                        booleanParam(defaultValue: false, name: 'Buslogic', description: ''),
-                                        booleanParam(defaultValue: false, name: 'Origination', description: ''),
-                                        booleanParam(defaultValue: false, name: 'KE', description: ''),
-                                        booleanParam(defaultValue: false, name: 'UG', description: ''),
-                                        booleanParam(defaultValue: false, name: 'ZM', description: '')
-                                ]
+                        parameters: [
+                                booleanParam(defaultValue: false, name: 'Buslogic', description: ''),
+                                booleanParam(defaultValue: false, name: 'Origination', description: ''),
+                                booleanParam(defaultValue: false, name: 'KE', description: ''),
+                                booleanParam(defaultValue: false, name: 'UG', description: ''),
+                                booleanParam(defaultValue: false, name: 'ZM', description: '')
+                        ]
 
-                        echo '>>> Feature branch deployment started'
+                        echo ">>> Feature branch deployment started: ${param.Buslogic} - ${param.KE}"
 
                         if (KE == 'true' && Buslogic == 'true') {
                             TASK = "deployBuslogicKeDev"
