@@ -27,14 +27,15 @@ pipeline {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                    env.GIT_PROJECT = sh(script: "basename `git rev-parse --show-toplevel`", returnStdout: true).trim()
                 }
             }
         }
 
         stage('Build') {
             steps {
+                echo ">>> GIT_PROJECT: ${env.GIT_PROJECT} "
                 echo ">>> JOB_NAME: ${env.JOB_NAME} "
-                echo ">>> JOB_BASE_NAME:${env.JOB_BASE_NAME} "
                 echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
                 script {
                     try {
