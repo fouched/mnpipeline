@@ -16,7 +16,8 @@ pipeline {
     }
 
     environment {
-        PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").rootProject.name}"
+        def props = "${readProperties(file: "${WORKSPACE}/settings.gradle")}"
+        PROJECT = props.rootProject.name
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
     }
 
@@ -27,7 +28,6 @@ pipeline {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
-                    env.GIT_PROJECT = sh(script: "basename `git rev-parse --show-toplevel`", returnStdout: true).trim()
                 }
             }
         }
