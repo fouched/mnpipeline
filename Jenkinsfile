@@ -33,7 +33,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo ">>> JOB_NAME: ${env.JOB_NAME} JOB_BASE_NAME${env.JOB_BASE_NAME}"
+                echo ">>> JOB_NAME: ${env.JOB_NAME} "
+                echo ">>> JOB_BASE_NAME:${env.JOB_BASE_NAME} "
                 echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
                 script {
                     try {
