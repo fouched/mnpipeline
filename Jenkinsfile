@@ -90,7 +90,7 @@ pipeline {
                                                 booleanParam(defaultValue: false, name: 'ZM', description: '')
                                         ]
 
-                        echo ">>> Feature branch deployment started: ${userInput}"
+                        echo ">>> Feature branch deployment started: ${userInput.Buslogic} - ${userInput.KE} - ${userInput.UG}"
 
 //                        if (KE == 'true' && Buslogic == 'true') {
 //                            TASK = "deployBuslogicKeDev"
