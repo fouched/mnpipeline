@@ -33,8 +33,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo ">>> Job: ${env.JOB_BASE_NAME}"
-                echo ">>> Build version: ${env.PROJECT_VERSION} "
+                echo ">>> JOB_NAME: ${env.JOB_NAME} JOB_BASE_NAME${env.JOB_BASE_NAME}"
+                echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
                 script {
                     try {
                         sh 'chmod +x gradlew'
