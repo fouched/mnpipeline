@@ -179,7 +179,7 @@ pipeline {
                 branch 'develop'
             }
             input {
-                message 'Do you want to do a release?'
+                message 'Do you want to do a GitFlow release?'
                 parameters {
                     choice(name: 'Release', choices: 'Yes\nNo', description: '')
                 }
