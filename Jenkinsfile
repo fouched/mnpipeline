@@ -63,19 +63,23 @@ pipeline {
                 branch 'feature/*'
             }
 
-            steps {
-                timeout(time: 1, unit: "MINUTES") {
-                    input {
-                        message 'Please select options for Feature branch deployment'
-                        parameters {
-                            booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-                            booleanParam(defaultValue: false, name: 'Origination', description: '')
-                            booleanParam(defaultValue: false, name: 'KE', description: '')
-                            booleanParam(defaultValue: false, name: 'UG', description: '')
-                            booleanParam(defaultValue: false, name: 'ZM', description: '')
-                        }
-                    }
+            timeout(time: 60, unit: "SECONDS") {
+                input 'Do you want to proceed to the Deployment?'
+            }
+
+            input {
+                message 'Please select options for Feature branch deployment'
+                parameters {
+                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                    booleanParam(defaultValue: false, name: 'Origination', description: '')
+                    booleanParam(defaultValue: false, name: 'KE', description: '')
+                    booleanParam(defaultValue: false, name: 'UG', description: '')
+                    booleanParam(defaultValue: false, name: 'ZM', description: '')
                 }
+            }
+
+            steps {
+
 
                 script {
                     echo '>>> Feature branch deployment started'
