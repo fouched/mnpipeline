@@ -80,7 +80,6 @@ pipeline {
 
             steps {
 
-
                 script {
                     echo '>>> Feature branch deployment started'
 
