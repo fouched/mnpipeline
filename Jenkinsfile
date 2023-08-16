@@ -16,7 +16,7 @@ pipeline {
     }
 
     environment {
-        PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").'rootProject.name'}".replaceAll("\"", "")
+        PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").'rootProject.name'}".replaceAll('"', '')
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
     }
 
