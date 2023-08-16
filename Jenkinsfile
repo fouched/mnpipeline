@@ -179,7 +179,7 @@ pipeline {
                 branch 'develop'
             }
             input {
-                message 'Input required'
+                message 'Do you want to do a release?'
                 parameters {
                     choice(name: 'Release', choices: 'Yes\nNo', description: '')
                 }
