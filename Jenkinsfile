@@ -34,7 +34,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo ">>> GIT_PROJECT: ${env.GIT_PROJECT} "
+                echo ">>> PROJECT: ${env.PROJECT} "
                 echo ">>> JOB_NAME: ${env.JOB_NAME} "
                 echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
                 script {
