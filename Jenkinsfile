@@ -64,7 +64,7 @@ pipeline {
             }
 
             steps {
-                timeout(time: 10, unit: 'SECONDS') {
+                timeout(time: 2, unit: 'MINUTES') {
                     script {
                         def userInput = input message: 'Deployment options:',
                                         parameters: [
