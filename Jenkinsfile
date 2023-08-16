@@ -62,14 +62,16 @@ pipeline {
                 beforeInput true
                 branch 'feature/*'
             }
-            input {
-                message 'Please select options for Feature branch deployment'
-                parameters {
-                    booleanParam(defaultValue: false, name: 'Buslogic', description: '')
-                    booleanParam(defaultValue: false, name: 'Origination', description: '')
-                    booleanParam(defaultValue: false, name: 'KE', description: '')
-                    booleanParam(defaultValue: false, name: 'UG', description: '')
-                    booleanParam(defaultValue: false, name: 'ZM', description: '')
+            timeout(time: 1, unit: "MINUTES") {
+                input {
+                    message 'Please select options for Feature branch deployment'
+                    parameters {
+                        booleanParam(defaultValue: false, name: 'Buslogic', description: '')
+                        booleanParam(defaultValue: false, name: 'Origination', description: '')
+                        booleanParam(defaultValue: false, name: 'KE', description: '')
+                        booleanParam(defaultValue: false, name: 'UG', description: '')
+                        booleanParam(defaultValue: false, name: 'ZM', description: '')
+                    }
                 }
             }
 
@@ -182,7 +184,7 @@ pipeline {
                 message 'User input required'
                 ok 'Perform release?'
                 parameters {
-                    choice(name: 'Release', choices: 'Yes\nNo', description: 'Perform release?')
+                    choice(name: 'Release', choices: 'Yes\nNo', description: 'OK')
                 }
             }
 
