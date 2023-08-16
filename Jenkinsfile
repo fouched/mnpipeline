@@ -181,7 +181,7 @@ pipeline {
             input {
                 message 'Input required'
                 parameters {
-                    choice(name: 'Perform Release?', choices: 'Yes\nNo', description: '')
+                    choice(name: 'Release', choices: 'Yes\nNo', description: '')
                 }
             }
 
