@@ -179,9 +179,9 @@ pipeline {
                 branch 'develop'
             }
             input {
-                message 'User input required'
+                message 'Input required'
                 parameters {
-                    choice(name: 'Release', choices: 'Yes\nNo', description: '')
+                    choice(name: 'Perform Release?', choices: 'Yes\nNo', description: '')
                 }
             }
 
