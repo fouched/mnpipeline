@@ -180,7 +180,6 @@ pipeline {
             }
             input {
                 message 'User input required'
-                ok 'Perform release?'
                 parameters {
                     choice(name: 'Release', choices: 'Yes\nNo', description: '')
                 }
