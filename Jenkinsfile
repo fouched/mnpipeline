@@ -16,8 +16,7 @@ pipeline {
     }
 
     environment {
-        def props = "${readProperties(file: "${WORKSPACE}/settings.gradle")}"
-        PROJECT = "${props.rootProject.name}"
+        PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle")}"
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
     }
 
