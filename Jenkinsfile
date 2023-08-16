@@ -63,9 +63,9 @@ pipeline {
                 branch 'feature/*'
             }
 
-            timeout(time: 60, unit: "SECONDS") {
-                input 'Do you want to proceed to the Deployment?'
-            }
+//            timeout(time: 60, unit: "SECONDS") {
+//                input 'Do you want to proceed to the Deployment?'
+//            }
 
             input {
                 message 'Please select options for Feature branch deployment'
