@@ -18,6 +18,7 @@ pipeline {
     environment {
         PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").'rootProject.name'}".replaceAll("\"", "")
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
+        JOB_NAME = JOB_NAME.replaceAll("%2F", "/")
     }
 
     stages {
@@ -36,7 +37,7 @@ pipeline {
                 echo ">>> PROJECT: ${env.PROJECT} "
                 echo ">>> JOB_NAME: ${env.JOB_NAME} "
                 echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
-                echo ">>> LocalServicesFeature/feature%2FDV-1992".replaceAll("%2F", "/")
+                echo ">>> JOB_NAME: ${env.JOB_NAME}"
                 script {
                     try {
                         sh 'chmod +x gradlew'
