@@ -36,7 +36,7 @@ pipeline {
                 echo ">>> PROJECT: ${env.PROJECT} "
                 echo ">>> JOB_NAME: ${env.JOB_NAME} "
                 echo ">>> PROJECT_VERSION: ${env.PROJECT_VERSION} "
-                rvho ">>> LocalServicesFeature/feature%2FDV-1992".replaceAll("%2F", "/")
+                echo ">>> LocalServicesFeature/feature%2FDV-1992".replaceAll("%2F", "/")
                 script {
                     try {
                         sh 'chmod +x gradlew'
