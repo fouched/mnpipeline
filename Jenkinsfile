@@ -16,6 +16,7 @@ pipeline {
     }
 
     environment {
+        DEPLOY_ENV = "TEST"
         PROJECT = "${readProperties(file: "${WORKSPACE}/settings.gradle").'rootProject.name'}".replaceAll("\"", "")
         PROJECT_VERSION = "${readProperties(file: "${WORKSPACE}/gradle.properties").version}"
         JOB_NAME = JOB_NAME.replaceAll("%2F", "/")
@@ -221,6 +222,7 @@ pipeline {
                                     booleanParam(defaultValue: false, name: 'ZM', description: '')
                             ]
 
+                    DEPLOY_ENV = "PROD"
                     echo ">>> Master branch deployment started"
 
                     if (userInput.KE && userInput.Buslogic) {
@@ -265,7 +267,7 @@ pipeline {
 
     post {
         success {
-            echo '>>> Sending success msg to Slack channel'
+            echo ">>> Sending success msg to Slack channel for ${env.DEPLOY_ENV}"
 //            slackSend(
 //                    channel: "#unibos-build",
 //                    token: "Migrated slack token",
