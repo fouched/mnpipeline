@@ -51,10 +51,10 @@ pipeline {
 			when { anyOf { branch 'master'; branch 'develop' } }
 			steps {
 				echo '>>> Publish artifacts'
-				script {
-					sh 'chmod +x gradlew'
-					sh './gradlew publish'
-				}
+//				script {
+//					sh 'chmod +x gradlew'
+//					sh './gradlew publish'
+//				}
 			}
 		}
 
@@ -76,23 +76,23 @@ pipeline {
 
 						echo ">>> Feature branch deployment started"
 
-						if (userInput.KE) {
-							TASK = "deployKeDev"
-							echo ">>> Deploying to TEST using task: ${TASK}"
-							sh "./gradlew ${TASK}"
-						}
-
-						if (userInput.UG) {
-							TASK = "deployUgDev"
-							echo ">>> Deploying to TEST using task: ${TASK}"
-							sh "./gradlew ${TASK}"
-						}
-
-						if (userInput.ZM) {
-							TASK = "deployZmDev"
-							echo ">>> Deploying to TEST using task: ${TASK}"
-							sh "./gradlew ${TASK}"
-						}
+//						if (userInput.KE) {
+//							TASK = "deployKeDev"
+//							echo ">>> Deploying to TEST using task: ${TASK}"
+//							sh "./gradlew ${TASK}"
+//						}
+//
+//						if (userInput.UG) {
+//							TASK = "deployUgDev"
+//							echo ">>> Deploying to TEST using task: ${TASK}"
+//							sh "./gradlew ${TASK}"
+//						}
+//
+//						if (userInput.ZM) {
+//							TASK = "deployZmDev"
+//							echo ">>> Deploying to TEST using task: ${TASK}"
+//							sh "./gradlew ${TASK}"
+//						}
 
 						echo '>>> Deployment finished'
 					}
@@ -117,23 +117,23 @@ pipeline {
 
 					echo ">>> Develop branch deployment started"
 
-					if (userInput.KE) {
-						TASK = "deployKeDev"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
-
-					if (userInput.UG) {
-						TASK = "deployUgDev"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
-
-					if (userInput.ZM) {
-						TASK = "deployZmDev"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
+//					if (userInput.KE) {
+//						TASK = "deployKeDev"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
+//
+//					if (userInput.UG) {
+//						TASK = "deployUgDev"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
+//
+//					if (userInput.ZM) {
+//						TASK = "deployZmDev"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
 
 					echo '>>> Deployment finished'
 				}
@@ -156,8 +156,8 @@ pipeline {
 				script {
 					if (Release == 'Yes') {
 						echo '>>> Starting release'
-						sh './gradlew releaseStart'
-						sh './gradlew releaseFinish'
+//						sh './gradlew releaseStart'
+//						sh './gradlew releaseFinish'
 						echo '>>> Release completed'
 					} else {
 						echo '>>> Release not required'
@@ -184,23 +184,23 @@ pipeline {
 
 					echo ">>> Master branch deployment started"
 
-					if (userInput.KE) {
-						TASK = "deployKeProd"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
-
-					if (userInput.UG) {
-						TASK = "deployUgProd"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
-
-					if (userInput.ZM) {
-						TASK = "deployZmProd"
-						echo ">>> Deploying to TEST using task: ${TASK}"
-						sh "./gradlew ${TASK}"
-					}
+//					if (userInput.KE) {
+//						TASK = "deployKeProd"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
+//
+//					if (userInput.UG) {
+//						TASK = "deployUgProd"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
+//
+//					if (userInput.ZM) {
+//						TASK = "deployZmProd"
+//						echo ">>> Deploying to TEST using task: ${TASK}"
+//						sh "./gradlew ${TASK}"
+//					}
 
 					echo '>>> Deployment finished'
 				}
@@ -212,35 +212,35 @@ pipeline {
 	post {
 		success {
 			echo '>>> Sending success msg to Slack channel'
-			slackSend(
-					channel: "#unibos-build",
-					token: "Migrated slack token",
-					color: "good",
-					message: """
-Project: ${env.PROJECT}
-Job: ${env.JOB_NAME}
-Version: ${env.PROJECT_VERSION}
-Comitted by: ${env.GIT_AUTHOR}
-Last commit message: ${env.GIT_COMMIT_MSG}
-Status: Success
-"""
-			)
+//			slackSend(
+//					channel: "#unibos-build",
+//					token: "Migrated slack token",
+//					color: "good",
+//					message: """
+//Project: ${env.PROJECT}
+//Job: ${env.JOB_NAME}
+//Version: ${env.PROJECT_VERSION}
+//Comitted by: ${env.GIT_AUTHOR}
+//Last commit message: ${env.GIT_COMMIT_MSG}
+//Status: Success
+//"""
+//			)
 		}
 		failure {
 			echo '>>> Sending failure msg to Slack channel'
-			slackSend(
-					channel: "#unibos-build",
-					token: "Migrated slack token",
-					color: "danger",
-					message: """
-Project: ${env.PROJECT}
-Job: ${env.JOB_NAME}
-Version: ${env.PROJECT_VERSION}
-Comitted by: ${env.GIT_AUTHOR}
-Last commit message: ${env.GIT_COMMIT_MSG}
-Status: Failure
-"""
-			)
+//			slackSend(
+//					channel: "#unibos-build",
+//					token: "Migrated slack token",
+//					color: "danger",
+//					message: """
+//Project: ${env.PROJECT}
+//Job: ${env.JOB_NAME}
+//Version: ${env.PROJECT_VERSION}
+//Comitted by: ${env.GIT_AUTHOR}
+//Last commit message: ${env.GIT_COMMIT_MSG}
+//Status: Failure
+//"""
+//			)
 		}
 	}
 }
