@@ -76,23 +76,23 @@ pipeline {
 
 						echo ">>> Feature branch deployment started"
 
-//						if (userInput.KE) {
-//							TASK = "deployKeDev"
-//							echo ">>> Deploying to TEST using task: ${TASK}"
+						if (userInput.KE) {
+							TASK = "deployKeDev"
+							echo ">>> Deploying to TEST using task: ${TASK}"
 //							sh "./gradlew ${TASK}"
-//						}
-//
-//						if (userInput.UG) {
-//							TASK = "deployUgDev"
-//							echo ">>> Deploying to TEST using task: ${TASK}"
+						}
+
+						if (userInput.UG) {
+							TASK = "deployUgDev"
+							echo ">>> Deploying to TEST using task: ${TASK}"
 //							sh "./gradlew ${TASK}"
-//						}
-//
-//						if (userInput.ZM) {
-//							TASK = "deployZmDev"
-//							echo ">>> Deploying to TEST using task: ${TASK}"
+						}
+
+						if (userInput.ZM) {
+							TASK = "deployZmDev"
+							echo ">>> Deploying to TEST using task: ${TASK}"
 //							sh "./gradlew ${TASK}"
-//						}
+						}
 
 						echo '>>> Deployment finished'
 					}
@@ -117,23 +117,23 @@ pipeline {
 
 					echo ">>> Develop branch deployment started"
 
-//					if (userInput.KE) {
-//						TASK = "deployKeDev"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					if (userInput.KE) {
+						TASK = "deployKeDev"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.UG) {
-//						TASK = "deployUgDev"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					}
+
+					if (userInput.UG) {
+						TASK = "deployUgDev"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.ZM) {
-//						TASK = "deployZmDev"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					}
+
+					if (userInput.ZM) {
+						TASK = "deployZmDev"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
+					}
 
 					echo '>>> Deployment finished'
 				}
@@ -184,23 +184,23 @@ pipeline {
 
 					echo ">>> Master branch deployment started"
 
-//					if (userInput.KE) {
-//						TASK = "deployKeProd"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					if (userInput.KE) {
+						TASK = "deployKeProd"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.UG) {
-//						TASK = "deployUgProd"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					}
+
+					if (userInput.UG) {
+						TASK = "deployUgProd"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.ZM) {
-//						TASK = "deployZmProd"
-//						echo ">>> Deploying to TEST using task: ${TASK}"
+					}
+
+					if (userInput.ZM) {
+						TASK = "deployZmProd"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
+					}
 
 					echo '>>> Deployment finished'
 				}
