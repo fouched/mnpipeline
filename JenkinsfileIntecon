@@ -75,7 +75,7 @@ pipeline {
 
 						echo ">>> Feature branch deployment started. userInput: ${userInput}"
 
-						if (userInput.Deployment == 'Yes') {
+						if (userInput == 'Yes') {
 							TASK = "deployColectaDev"
 							echo ">>> Deploying to TEST using task: ${TASK}"
 //							sh "./gradlew ${TASK}"
