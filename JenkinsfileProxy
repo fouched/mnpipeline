@@ -4,9 +4,9 @@ pipeline {
 
 	agent { label 'linux' }
 
-	tools {
-		jdk 'Coretto 17'
-	}
+//	tools {
+//		jdk 'Coretto 17'
+//	}
 
 	triggers { pollSCM('H/2 * * * *') } // every 2 minutes
 
