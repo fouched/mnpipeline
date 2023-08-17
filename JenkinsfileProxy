@@ -2,7 +2,7 @@
 
 pipeline {
 
-	agent { label 'linux' }
+	agent any
 
 //	tools {
 //		jdk 'Coretto 17'
