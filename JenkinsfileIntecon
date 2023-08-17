@@ -73,7 +73,7 @@ pipeline {
 										choice(name: 'Deployment', choices: 'Yes\nNo', description: '')
 								]
 
-						echo ">>> Feature branch deployment started. userInput: ${userInput.Deployment}"
+						echo ">>> Feature branch deployment started. userInput: ${userInput}"
 
 						if (userInput.Deployment == 'Yes') {
 							TASK = "deployColectaDev"
