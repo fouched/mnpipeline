@@ -15,6 +15,8 @@ pipeline {
 	options {
 		disableConcurrentBuilds(abortPrevious: true)
 		skipStagesAfterUnstable()
+		// This is required if you want to clean before build
+		skipDefaultCheckout(true)
 	}
 
 	environment {
@@ -38,6 +40,8 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo ">>> Build version: ${env.PROJECT_VERSION}  ${env.JOB_BASE_NAME}"
+				cleanWs()
+				echo ">>> Workspace cleaned, continuing with build"
 //				script {
 //					try {
 //						sh 'chmod +x gradlew'
