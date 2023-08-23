@@ -172,46 +172,47 @@ pipeline {
 //			}
 //		}
 //
-//		stage('Prod deployment') {
-//			when {
-//				beforeInput true
-//				branch 'master'
-//			}
-//
-//			steps {
-//				script {
-//					def userInput = input message: 'Deployment options:',
-//							parameters: [
-//									booleanParam(defaultValue: false, name: 'KE', description: ''),
-//									booleanParam(defaultValue: false, name: 'UG', description: ''),
-//									booleanParam(defaultValue: false, name: 'ZM', description: '')
-//							]
-//
-//					DEPLOY_ENV = "PROD"
-//					echo ">>> Master branch deployment started"
-//
-//					if (userInput.KE) {
-//						TASK = "deployKeProd"
-//						echo ">>> Deploying to PROD using task: ${TASK}"
+		stage('Prod deployment') {
+			when {
+				beforeInput true
+				branch 'master'
+			}
+
+			steps {
+				script {
+					def userInput = input message: 'Deployment options:',
+							parameters: [
+									booleanParam(defaultValue: false, name: 'UploadApp', description: ''),
+									booleanParam(defaultValue: false, name: 'KE', description: ''),
+									booleanParam(defaultValue: false, name: 'UG', description: ''),
+									booleanParam(defaultValue: false, name: 'ZM', description: '')
+							]
+
+					DEPLOY_ENV = "PROD"
+					echo ">>> Master branch deployment started"
+
+					if (userInput.UploadApp && userInput.KE) {
+						TASK = "uploadBranchApp -Punibos.locale=ke"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.UG) {
-//						TASK = "deployUgProd"
-//						echo ">>> Deploying to PROD using task: ${TASK}"
+					}
+
+					if (userInput.UploadApp && userInput.UG) {
+						TASK = "uploadBranchApp -Punibos.locale=ug"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					if (userInput.ZM) {
-//						TASK = "deployZmProd"
-//						echo ">>> Deploying to PROD using task: ${TASK}"
+					}
+
+					if (userInput.UploadApp && userInput.ZM) {
+						TASK = "uploadBranchApp -Punibos.locale=zm"
+						echo ">>> Deploying to TEST using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
-//					}
-//
-//					echo '>>> Deployment finished'
-//				}
-//			}
-//		}
+					}
+
+					echo '>>> Deployment finished'
+				}
+			}
+		}
 
 	}
 
