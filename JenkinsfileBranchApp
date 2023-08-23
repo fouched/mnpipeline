@@ -10,7 +10,7 @@ pipeline {
 //		jdk 'Coretto 17 Windows'
 //	}
 
-	triggers { pollSCM('H/5 * * * *') } // every 5 minutes
+	triggers { pollSCM('H/2 * * * *') } // every 5 minutes
 
 	options {
 		disableConcurrentBuilds(abortPrevious: true)
