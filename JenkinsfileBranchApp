@@ -15,8 +15,6 @@ pipeline {
 	options {
 		disableConcurrentBuilds(abortPrevious: true)
 		skipStagesAfterUnstable()
-		// This is required if you want to clean before build
-		skipDefaultCheckout(true)
 	}
 
 	environment {
@@ -27,12 +25,18 @@ pipeline {
 	}
 
 	stages {
+		stage('CommitDetails') {
+			steps {
+				script {
+					env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+					env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+				}
+			}
+		}
 
 		stage('Build') {
 			steps {
 				echo ">>> Build version: ${env.PROJECT_VERSION}  ${env.JOB_BASE_NAME}"
-				cleanWs()
-				echo ">>> Workspace cleaned, continuing with build"
 //				script {
 //					try {
 //						sh 'chmod +x gradlew'
@@ -42,15 +46,6 @@ pipeline {
 //						archiveArtifacts artifacts: '**/build/test-results/test/*.xml', allowEmptyArchive: true
 //					}
 //				}
-			}
-		}
-
-		stage('CommitDetails') {
-			steps {
-				script {
-					env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
-					env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
-				}
 			}
 		}
 
@@ -254,6 +249,16 @@ pipeline {
 //Status: Failure
 //"""
 //			)
+		}
+		// Clean after build
+		always {
+			echo '>>> Cleaning workspace'
+			cleanWs(cleanWhenNotBuilt: false,
+					deleteDirs: true,
+					disableDeferredWipeout: true,
+					notFailBuild: true,
+					patterns: [[pattern: '.gitignore', type: 'INCLUDE']]
+			)
 		}
 	}
 }
