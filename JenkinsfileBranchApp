@@ -123,19 +123,19 @@ pipeline {
 
 					if (userInput.UploadApp && userInput.KE) {
 						TASK = "uploadBranchApp -Punibos.locale=ke"
-						echo ">>> Deploying to TEST using task: ${TASK}"
+						echo ">>> Deploying to ${DEPLOY_ENV} using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
 					}
 
 					if (userInput.UploadApp && userInput.UG) {
 						TASK = "uploadBranchApp -Punibos.locale=ug"
-						echo ">>> Deploying to TEST using task: ${TASK}"
+						echo ">>> Deploying to ${DEPLOY_ENV} using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
 					}
 
 					if (userInput.UploadApp && userInput.ZM) {
 						TASK = "uploadBranchApp -Punibos.locale=zm"
-						echo ">>> Deploying to TEST using task: ${TASK}"
+						echo ">>> Deploying to ${DEPLOY_ENV} using task: ${TASK}"
 //						sh "./gradlew ${TASK}"
 					}
 
