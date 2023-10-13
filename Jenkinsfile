@@ -194,9 +194,16 @@ pipeline {
                 script {
                     if (Release == 'Yes') {
                         echo '>>> Starting release'
+                        sh 'git checkout develop'
+                        sh 'git pull'
 //                        sh './gradlew releaseStart'
 //                        sh './gradlew releaseFinish'
                         echo '>>> Release completed'
+                        echo '>>> pushing develop and master branches'
+
+//                        sh 'git push -u origin develop'
+//                        sh 'git push -u origin master'
+                        echo '>>> develop and master branch pushed'
                     } else {
                         echo '>>> Release not required'
                     }
